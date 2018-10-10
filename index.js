@@ -8,21 +8,6 @@ app.use(express.static(__dirname + '/public')); //serving statics files like css
 var port=process.env.PORT || 3000; //this is for heroku
 
 
-var serverTime = require('./public/js/jlfunctions.js'); //importing my functions for time
-
-
-//---------------------------------
-var mysql = require('mysql');
-
-
-var pool= mysql.createPool({
-  host     : 'db4free.net',
-  port	   : 3306,	
-  user     : 'jlchat',
-  password : 'jlchat2016',
-  insecureAuth: true, 
-  database : 'dbchat2016'
-});
 
 
 // Define/initialize our global vars
@@ -34,7 +19,7 @@ var userInfo=[];
 
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 io.on('connection', function(socket){
