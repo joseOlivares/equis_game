@@ -21,7 +21,7 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
 
-	socket.on('user loging',(userName)=>{
+	socket.on('user loging',function(userName){
 		connectedUsers.push({
 			id : socket.id,
 			userName : userName
