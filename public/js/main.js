@@ -1,5 +1,5 @@
 var app = {
-    serverUrl:'https://equisgame.herokuapp.com/',
+    serverUrl:'https://equisgame.herokuapp.com',
     // Application Constructor
     initialize: function() {
         this.listenSocket();
