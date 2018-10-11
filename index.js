@@ -19,6 +19,8 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
+io.set('origins','*:*');
+
 io.on('connection', function(socket){
 
 	socket.on('user loging',function(userName){
