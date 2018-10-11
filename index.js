@@ -19,15 +19,16 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
-io.set('origins','*:*');
+//io.set('origins','*:*');
 
 io.on('connection', function(socket){
 
 	socket.on('user loging',function(userName){
-		connectedUsers.push({
+		
+		/*connectedUsers.push({
 			id : socket.id,
 			userName : userName
-		});
+		});*/
 
 		console.log('An user connected...'+userName);
 		//console.log(connectedUsers.toString());
