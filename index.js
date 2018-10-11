@@ -27,7 +27,7 @@ io.on('connection', function(socket){
 			userName : userName
 		});
 
-		console.log('User '+userName+' connected...');
+		console.log('An user connected...'+userName);
 		//console.log(connectedUsers.toString());
 		socketCount++;// Socket has connected, increase socket count
 		io.sockets.emit('users connected', socketCount);    // Let all sockets know how many are connected
