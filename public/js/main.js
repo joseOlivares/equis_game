@@ -15,9 +15,16 @@ var app = {
 
         $('#btnLogin').on('click',function(){
                 userName=$('#txtUserName').val();//Nombre de usuario
-                $('#txtUserName').prop('disabled', true); //Desabilitando el input
-                $('#btnLogin').prop('disabled',true);//disabling btnLogin
-                
+
+                if(userName==="" || userName.length <2){
+                    UIkit.notification("<span class='uk-text-capitalize'>Escriba nombre de usuario</span>", {status: 'danger'});
+                }else{
+                    socket.emit('user loging',userName);
+                    $('#txtUserName').prop('disabled', true); //Desabilitando el input
+                    $('#btnLogin').prop('disabled',true);//disabling btnLogin
+                    $('#btnLogout').prop('disabled',false);                       
+                }
+
 
                 /*$('#idsender').prop('disabled', true); //disaabling input idsender
                 $('#m').prop('disabled', false); //enabling input idsender
@@ -26,7 +33,13 @@ var app = {
                 $('#btnLogin').prop('disabled',true);//disabling btnLogin
                 $('#btnLogout').prop('disabled',false);//enabling btnLogout
                 */
-        });        
+        }); 
+
+        $('#btnLogout').on('click',function(){      
+                $('#txtUserName').prop('disabled', false); 
+                $('#btnLogin').prop('disabled',false);
+                $('#btnLogout').prop('disabled',true);
+        }); 
 
     },
 
