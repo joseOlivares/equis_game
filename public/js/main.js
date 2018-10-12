@@ -22,6 +22,10 @@ var app = {
 
         });
 
+        socket.on('start game'){
+
+        };
+
         $('#btnLogin').on('click',function(){
                 userName=$('#txtUserName').val();//Nombre de usuario
 
@@ -49,8 +53,9 @@ var app = {
 
         $('#btnFight').on('click',function(){  
             var rival=$('#selectVersus').val() || "0";  
-            if (rival!=="0") { //se configura la pelea
-                $('#btnFight').prop('disabled', true);     
+            if (rival!=="0") { //se intenta configurar la pelea
+                $('#btnFight').prop('disabled', true); 
+                socket.emit('playwith',{rivalName:rival,contender:userName}); //enviando el nombre del rival con quien jugar                    
             }  
 
         });        

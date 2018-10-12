@@ -20,10 +20,9 @@ app.get('/', function(req, res){
 //io.set('origins','*:*');
 
 io.on('connection', function(socket){
-	socketCount+=1;// Socket has connected, increase socket count
 
 	socket.on('user loging',function(userName){
-		//socketCount+=1;// Socket has connected, increase socket count
+		socketCount+=1;// Socket has connected, increase socket count
 		io.sockets.emit('users connected', socketCount);    // Let all sockets know how many are connected
 		
 		connectedUsers.push({
@@ -36,11 +35,10 @@ io.on('connection', function(socket){
 	});
 
 
-
-
-	socket.on('chat message', function(msg){ //broadcasting msgs
-
-	});//end socket.on 'chat message'
+	socket.on('playwith', function(data){ 
+		var idRival=searchUser(data.rivalName);//buscando id
+		socket.broadcast.to(idRival).emit('start game',data);//invitando al rival
+	});
  
 
     socket.on('disconnect', function () {
@@ -59,6 +57,15 @@ io.on('connection', function(socket){
 
 }); //close socket.on("connection")
 
+function searchUser(userName){
+	for(var i=0; i < connectedUsers.length; i++){  //deletng users desconnected   
+	    if(connectedUsers[i].userName === userName){
+	        return connectedUsers[i].id; //devolviendo el socket id
+	    }
+	}
+
+	return -1; //not found
+}
 
 server.listen(port, function(){
   console.log('Server listening on *:'+port);
