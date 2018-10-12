@@ -1,6 +1,10 @@
-var app=require('express')();
-var http=require('http').Server(app);
-var io=require('socket.io')(http);
+
+var express= require('express');
+var app = express();
+var server=require('http').createServer(app);
+var io = require('socket.io')(server);
+
+
 /*var express= require('express');
 var app = express();
 var http = require('http').Server(app);
@@ -58,7 +62,7 @@ io.on('connection', function(socket){
 }); //close socket.on("connection")
 
 
-http.listen(port, function(){
+server.listen(port, function(){
   console.log('listening on *:'+port);
 });
 
