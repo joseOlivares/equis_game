@@ -13,7 +13,13 @@ var app = {
         }); 
 
         socket.on('users list',function(connectedUsers){
-            
+
+            for (var i = 0; i < connectedUsers.length; i++) {
+                if(connectedUsers[i].userName!==userName){
+                    $('#selectVersus').append($('<option>',{ value:connectedUsers[i].userName,text:connectedUsers[i].userName}));
+                }
+            }
+
         });
 
         $('#btnLogin').on('click',function(){
@@ -25,23 +31,20 @@ var app = {
                     socket.emit('user loging',userName);
                     $('#txtUserName').prop('disabled', true); //Desabilitando el input
                     $('#btnLogin').prop('disabled',true);//disabling btnLogin
-                    $('#btnLogout').prop('disabled',false);                       
+                    $('#btnLogout').prop('disabled',false); 
+                    $('#selectVersus').prop('disabled',false);
+                    $('#divVersus').prop('hidden',false);   //haciendo visible
+                    $('#divLogin').addClass('uk-invisible');//ocultando login
+                    $('#divMyUser').html(userName);                        
                 }
-
-
-                /*$('#idsender').prop('disabled', true); //disaabling input idsender
-                $('#m').prop('disabled', false); //enabling input idsender
-                socket.emit('user logged',currentUserId); //enviando ID de usurio logead    
-                toReceivers(currentUserId);//adding posible receiver to html select, calling a function 
-                $('#btnLogin').prop('disabled',true);//disabling btnLogin
-                $('#btnLogout').prop('disabled',false);//enabling btnLogout
-                */
         }); 
 
         $('#btnLogout').on('click',function(){      
                 $('#txtUserName').prop('disabled', false); 
                 $('#btnLogin').prop('disabled',false);
                 $('#btnLogout').prop('disabled',true);
+                $('#divVersus').prop('hidden',true);
+                $('#divLogin').removeClass('uk-invisible');//mostrando login
         }); 
 
     },
