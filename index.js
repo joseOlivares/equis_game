@@ -21,9 +21,9 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
 	socketCount+=1;// Socket has connected, increase socket count
-	
+
 	socket.on('user loging',function(userName){
-		socketCount+=1;// Socket has connected, increase socket count
+		//socketCount+=1;// Socket has connected, increase socket count
 		io.sockets.emit('users connected', socketCount);    // Let all sockets know how many are connected
 		
 		connectedUsers.push({
