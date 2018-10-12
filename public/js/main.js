@@ -12,6 +12,9 @@ var app = {
             $('#usersConnected').html(data); //mostrando usuarios conectados
         }); 
 
+        socket.on('users list',function(connectedUsers){
+            
+        });
 
         $('#btnLogin').on('click',function(){
                 userName=$('#txtUserName').val();//Nombre de usuario

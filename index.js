@@ -8,7 +8,7 @@ var port=process.env.PORT || 3000; //this is for heroku
 
 
 // Define/initialize our global vars
- var socketCount=1;
+ var socketCount=0;
  var connectedUsers = []; //array to store usernames and socket.id
 //-------------------------------
 
@@ -20,8 +20,10 @@ app.get('/', function(req, res){
 //io.set('origins','*:*');
 
 io.on('connection', function(socket){
+	socketCount+=1;// Socket has connected, increase socket count
+	
 	socket.on('user loging',function(userName){
-		socketCount++;// Socket has connected, increase socket count
+		socketCount+=1;// Socket has connected, increase socket count
 		io.sockets.emit('users connected', socketCount);    // Let all sockets know how many are connected
 		
 		connectedUsers.push({
@@ -29,8 +31,8 @@ io.on('connection', function(socket){
 			userName : userName
 		});
 
-		console.log('An user connected...'+connectedUsers[0].userName.toString());
-		//console.log(connectedUsers.toString());
+		console.log('An user connected... '+userName.toString());
+		io.sockets.emit('users list', connectedUsers); // enviando listado de todos los usuarios conectados
 	});
 
 
@@ -42,17 +44,24 @@ io.on('connection', function(socket){
  
 
     socket.on('disconnect', function () {
+        socketCount-=1; // Decrease the socket count on a disconnect
+        var userDisconnected="";
+	    for(var i=0; i < connectedUsers.length; i++){  //deletng users desconnected   
+	        if(connectedUsers[i].id === socket.id){
+	        	userDisconnected=connectedUsers[i].userName;
+	          connectedUsers.splice(i,1); 
+	        }
+	    }
 
-        socketCount--; // Decrease the socket count on a disconnect	
-        io.sockets.emit('users connected', socketCount);    // Let all sockets know how many are connected
-        console.log('user disconnected');
+        io.sockets.emit('Users connected', socketCount);    // Let all sockets know how many are connected
+        console.log('User disconnected... '+userDisconnected);
     });
 
 }); //close socket.on("connection")
 
 
 server.listen(port, function(){
-  console.log('listening on *:'+port);
+  console.log('Server listening on *:'+port);
 });
 
 
