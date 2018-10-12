@@ -47,6 +47,14 @@ var app = {
                 $('#divLogin').removeClass('uk-invisible');//mostrando login
         }); 
 
+        $('#btnFight').on('click',function(){  
+            var rival=$('#selectVersus').val() || "0";  
+            if (rival!=="0") { //se configura la pelea
+                $('#btnFight').prop('disabled', true);     
+            }  
+
+        });        
+
     },
 
 
