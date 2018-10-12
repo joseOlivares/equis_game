@@ -18,6 +18,7 @@ var port=process.env.PORT || 3000; //this is for heroku
 
 
 // Define/initialize our global vars
+ var socketCount=0;
 //var connectedUsers = []; //array to store usernames and socket.id
 //-------------------------------
 
