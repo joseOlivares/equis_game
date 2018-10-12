@@ -22,6 +22,8 @@ app.get('/', function(req, res){
 //io.set('origins','*:*');
 
 io.on('connection', function(socket){
+	socketCount++;// Socket has connected, increase socket count
+	io.sockets.emit('users connected', socketCount);    // Let all sockets know how many are connected
 
 	socket.on('user loging',function(userName){
 		
@@ -30,10 +32,8 @@ io.on('connection', function(socket){
 			userName : userName
 		});*/
 
-		//console.log('An user connected...'+userName.toString());
+		console.log('An user connected...'+userName.toString());
 		//console.log(connectedUsers.toString());
-		socketCount++;// Socket has connected, increase socket count
-		io.sockets.emit('users connected', socketCount);    // Let all sockets know how many are connected
 	});
 
 
