@@ -16,7 +16,7 @@ var app = {
         $('#btnLogin').on('click',function(){
                 userName=$('#txtUserName').val();//Nombre de usuario
 
-                if(userName==="" || userName.length <2){
+                if(userName==="" || userName.length <3){
                     UIkit.notification("<span class='uk-text-capitalize'>Escriba nombre de usuario</span>", {status: 'danger'});
                 }else{
                     socket.emit('user loging',userName);
