@@ -19,7 +19,7 @@ var app = {
                 if(userName==="" || userName.length <3){
                     UIkit.notification("<span class='uk-text-capitalize'>Escriba nombre de usuario</span>", {status: 'danger'});
                 }else{
-                    socket.emit('user loging',userName);
+                    socket.emit('user loging',77);
                     $('#txtUserName').prop('disabled', true); //Desabilitando el input
                     $('#btnLogin').prop('disabled',true);//disabling btnLogin
                     $('#btnLogout').prop('disabled',false);                       
