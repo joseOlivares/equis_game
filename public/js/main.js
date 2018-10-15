@@ -1,4 +1,3 @@
-var socket=-1;
 var app = {
     serverUrl:'https://equisgame.herokuapp.com/',
     myUserName:-1, //-1 es no definido
@@ -11,7 +10,7 @@ var app = {
     },
 
     listenSocket:function(){
-        socket = io.connect(this.serverUrl); //creating socket connection
+        var socket = io.connect(this.serverUrl); //creating socket connection
         //var userName=-1;//nombre de usuario local
         socket.on('users connected', function(data){
             $('#usersConnected').html(data); //mostrando usuarios conectados
