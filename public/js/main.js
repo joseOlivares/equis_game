@@ -32,6 +32,12 @@ var app = {
                 } //si no acepta hacer, hacer algo     
         });
 
+        socket.on('first move', function(data){ //data contiene los nombres y ids de los jugadores
+            alert(data.rivalName+' ha aceptado Jugar... realiza el primer movimiento ');
+            
+
+        });        
+
         $('#btnLogin').on('click',function(){
                 userName=$('#txtUserName').val();//Nombre de usuario
 
