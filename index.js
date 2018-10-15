@@ -20,12 +20,12 @@ app.get('/', function(req, res){
 //io.set('origins','*:*');
 
 io.on('connection', function(socket){
+			socketCount+=1;// Socket has connected, increase socket count	
+			io.sockets.emit('users connected', socketCount);    // Let all sockets know how many are connected		
 
 	socket.on('user loging',function(userName){
 
 		if(searchUser(userName)===-1){ //si nombre de usuario no existe en la lista
-			socketCount+=1;// Socket has connected, increase socket count	
-			io.sockets.emit('users connected', socketCount);    // Let all sockets know how many are connected		
 			connectedUsers.push({
 				id : socket.id,
 				userName : userName
