@@ -3,6 +3,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.listenSocket();
+        this.prepareBoard(true, true); //prepareBoard(Does it put happy faces?, are the buttons disabled?)
     },
 
     listenSocket:function(){
@@ -75,8 +76,25 @@ var app = {
 
         });       
 
-    }
+    },
 
+    prepareBoard: function(happyFaces,areBtnDisabled){
+        for (var i = 0; i < 3; i++) {
+            for (var j = 0; j < 3; j++) {
+                if(happyFaces==true){
+                    $('#p'+i+j).html('<span class="uk-icon" uk-icon="icon: happy"></span>'); 
+                }
+
+                if(areBtnDisabled==true){
+                    $('#p'+i+j).prop('disabled',isDisabled); 
+                }
+            }       
+        }
+    },
+
+    setPosition: function(pos){
+        alert(pos);
+    }
 
 };
 
