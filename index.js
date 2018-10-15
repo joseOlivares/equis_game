@@ -22,16 +22,19 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
 
 	socket.on('user loging',function(userName){
-		socketCount+=1;// Socket has connected, increase socket count
-		io.sockets.emit('users connected', socketCount);    // Let all sockets know how many are connected
-		
-		connectedUsers.push({
-			id : socket.id,
-			userName : userName
-		});
 
-		console.log('An user connected... '+userName.toString());
-		io.sockets.emit('users list', connectedUsers); // enviando listado de todos los usuarios conectados
+		if(searchUser(userName)===-1){ //si nombre de usuario no existe en la lista
+			socketCount+=1;// Socket has connected, increase socket count	
+			io.sockets.emit('users connected', socketCount);    // Let all sockets know how many are connected		
+			connectedUsers.push({
+				id : socket.id,
+				userName : userName
+			});
+
+			console.log('An user connected... '+userName.toString());
+			io.sockets.emit('users list', connectedUsers); // enviando listado de todos los usuarios conectados
+		}
+
 	});
 
 
