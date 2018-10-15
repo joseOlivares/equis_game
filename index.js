@@ -71,6 +71,3 @@ function searchUser(userName){
 server.listen(port, function(){
   console.log('Server listening on *:'+port);
 });
-
-
-
