@@ -1,3 +1,4 @@
+var socketx;
 var app = {
     serverUrl:'https://equisgame.herokuapp.com/',
     myUserName:-1, //-1 es no definido
@@ -11,6 +12,7 @@ var app = {
 
     listenSocket:function(){
         var socket = io.connect(this.serverUrl); //creating socket connection
+        socketx=socket;
         //var userName=-1;//nombre de usuario local
         socket.on('users connected', function(data){
             $('#usersConnected').html(data); //mostrando usuarios conectados
@@ -99,7 +101,11 @@ var app = {
                 socket.emit('play with',{rivalName:rival,contender:app.myUserName}); //enviando el nombre del rival a retar                    
             }  
 
-        });       
+        });
+
+        function posx(pos){
+            alert(pos);
+        }       
 
     },
 
@@ -131,7 +137,7 @@ var app = {
                 }
 
                 //enviamos posicion y id del siguiente jugador para que tambien se aplique la seleccion en su tablero
-                socket.emit('next player',nextPlayer); 
+                socketx.emit('next player',nextPlayer); 
             }else{ //¿que pasa si intenta colocar en marca en espacio ocupado? 
                 alert("Esta posición ya fue seleccionada");
             } 
