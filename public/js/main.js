@@ -23,7 +23,7 @@ var app = {
         });
 
         socket.on('start game'){
-
+               alert('Juego iniciado');
         };
 
         $('#btnLogin').on('click',function(){
@@ -51,14 +51,14 @@ var app = {
                 $('#divLogin').removeClass('uk-invisible');//mostrando login
         }); 
 
-        /*$('#btnFight').on('click',function(){  
+        $('#btnFight').on('click',function(){  
             var rival=$('#selectVersus').val() || "0";  
             if (rival!=="0"){ //se intenta configurar la pelea
                 $('#btnFight').prop('disabled', true); 
                 socket.emit('playwith',{rivalName:rival,contender:userName}); //enviando el nombre del rival con quien jugar                    
             }  
 
-        });   */     
+        });       
 
     }
 
