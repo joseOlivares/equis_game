@@ -60,12 +60,11 @@ var app = {
         });   
 
         socket.on('playing', function(data){ //data
-            alert("Es tu turno!");
             app.prepareBoard(false,false);
+            UIkit.notification("Es tu turno!", {timeout: 1500});
             //marcado el movimiento del jugador anterior en nuestro tablero
             $('#'+data.markedPosition.toString()).html('<span class="uk-text-large uk-text-bold">'+data.mark+'</span>');
-            //UIkit.notification("Es tu turno!", {timeout: 1500});
-            app.prepareBoard(false,false);
+
         });                      
 
         $('#btnLogin').on('click',function(){
