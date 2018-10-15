@@ -29,12 +29,14 @@ var app = {
                 var play=confirm(data.contender+' quiere jugar contigo...')||false;
                 if(play==true){//si acepta jugar 
                     socket.emit('game started',data); //le indicamos al server que el juego inicio
+                    $("#selectVersus").val(data.contender.toString()); //mostramos el nombre del contrincante
+                    $("#selectVersus").prop('disabled',true);//desabilitamos el select
                 } //si no acepta hacer, hacer algo     
         });
 
         socket.on('first move', function(data){ //data contiene los nombres y ids de los jugadores
             alert(data.rivalName+' ha aceptado Jugar... realiza el primer movimiento ');
-            
+
 
         });        
 
