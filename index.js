@@ -52,7 +52,7 @@ io.on('connection', function(socket){
 		data.idContender=idContender;//adicionando el idContender a data para no tener que buscarlo nuevamente
 		data.contenderMark="X"; 
 		socket.broadcast.to(idContender).emit('contender firstmove',data);//invitando al contender a hacer el primer movimiento, setando jugadores 
-		socket.broadcast.to(idRival).emit('rival setplayers',data); //seteando datos de jugadores en memoria del Rival 
+		socket.broadcast.to(data.idRival).emit('rival setplayers',data); //seteando datos de jugadores en memoria del Rival 
 	});
  
  	socket.on('next player', function(data){ //enviando invitacion a jugar
