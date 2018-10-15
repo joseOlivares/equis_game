@@ -26,7 +26,10 @@ var app = {
         });
 
         socket.on('start game', function(data){
-               alert(data.contender +' quiere jugar contigo...');
+                var play=confirm(data.contender+' quiere jugar contigo...')||false;
+                if(play===true){//si acepta jugar 
+                    socket.emit('game started',data); 
+                } //si no acepta hacer, hacer algo     
         });
 
         $('#btnLogin').on('click',function(){
