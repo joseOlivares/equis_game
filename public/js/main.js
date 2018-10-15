@@ -1,6 +1,6 @@
 var app = {
     serverUrl:'https://equisgame.herokuapp.com/',
-    players:[],
+    players:-1, //inicializando -1 es nadie
     // Application Constructor
     initialize: function() {
         this.listenSocket();
@@ -42,7 +42,7 @@ var app = {
             $("#selectVersus").val(data.rivalName.toString()); //mostramos el nombre del rival
             $("#selectVersus").prop('disabled',true);//desabilitamos el select
             app.prepareBoard(false,false); //habilitamos el tablero para que Contender seleccione una posicion.
-            app.players=data; //guardamos los datos de los jugadores en memoria local
+            app.players=data; //guardamos los datos de los jugadores en memoria local, es un Json
         });        
 
         $('#btnLogin').on('click',function(){
