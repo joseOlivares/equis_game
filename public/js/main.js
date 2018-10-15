@@ -117,11 +117,12 @@ var app = {
     },
 
     setPosition: function(pos){
-        alert("Pos= "+pos);
         if(pos){
             var btnPosText=$('#'+pos.toString()).text();
+            debugger;
             if(app.players!==-1){ //si estan los datos de los jugadores en memoria
                 var nextPlayer={idNextPlayer:-1,markedPosition:-1,mark:app.myMark};
+                debugger;
                 if (btnPosText!=="X" && btnPosText!=="O" ) { //si no ha sido marcada la posicion
                     $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca
                     app.prepareBoard(false,true);//deshabilitamos todos los botones, para que el otro jugador elija
