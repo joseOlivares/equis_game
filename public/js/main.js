@@ -23,7 +23,7 @@ var app = {
         });
 
         socket.on('start game', function(data){
-               alert('Juego iniciado');
+               alert(data.contender +' quiere jugar contigo...');
         });
 
         $('#btnLogin').on('click',function(){
