@@ -117,6 +117,7 @@ var app = {
     },
 
     setPosition: function(pos){
+        alert("Pos= "+pos);
         if(pos){
             var btnPosText=$('#'+pos.toString()).text();
             if(app.players!==-1){ //si estan los datos de los jugadores en memoria
