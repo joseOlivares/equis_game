@@ -15,6 +15,7 @@ var app = {
         socket.on('users list',function(connectedUsers){
 
             for (var i = 0; i < connectedUsers.length; i++) {
+                console.log(connectedUsers.toString());
                 if(connectedUsers[i].userName!==userName){
                     $('#selectVersus').append($('<option>',{ value:connectedUsers[i].userName,text:connectedUsers[i].userName}));
                 }
