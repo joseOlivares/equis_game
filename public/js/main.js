@@ -1,5 +1,6 @@
 var app = {
     serverUrl:'https://equisgame.herokuapp.com/',
+    players:[],
     // Application Constructor
     initialize: function() {
         this.listenSocket();
@@ -36,9 +37,10 @@ var app = {
         });
 
         socket.on('first move', function(data){ //data contiene los nombres y ids de los jugadores
-            alert(data.rivalName+' ha aceptado Jugar... realiza el primer movimiento ');
+            alert(data.rivalName+' ha aceptado Jugar... realiza el primer movimiento');
             $("#selectVersus").val(data.rivalName.toString()); //mostramos el nombre del rival
             $("#selectVersus").prop('disabled',true);//desabilitamos el select
+            this.prepareBoard(false,false); //habilitamos el tablero para que seleccione una posicion.
 
         });        
 
