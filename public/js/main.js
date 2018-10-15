@@ -121,7 +121,7 @@ var app = {
         }
     },
 
-    setPosition: function(pos){
+    xsetPosition: function(pos){
         var btnPosText=$('#'+pos.toString()).text();
         if(app.players!==-1){ //si estan los datos de los jugadores en memoria
             var nextPlayer={idNextPlayer:-1,markedPosition:-1,mark:app.myMark};
