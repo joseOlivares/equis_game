@@ -61,7 +61,7 @@ var app = {
 
         socket.on('playing', function(data){ //data
             app.prepareBoard(false,false);
-            UIkit.notification("Es tu turno!", {timeout: 1500});
+            alert("¡Es tu turno!");
             //marcado el movimiento del jugador anterior en nuestro tablero
             $('#'+data.markedPosition.toString()).html('<span class="uk-text-large uk-text-bold">'+data.mark+'</span>');
 
