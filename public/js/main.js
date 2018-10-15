@@ -1,5 +1,6 @@
 var app = {
     serverUrl:'https://equisgame.herokuapp.com/',
+    socket:io.connect(this.serverUrl), //creating socket connection to the server
     myUserName:-1, //-1 es no definido
     players:-1, //inicializando -1 es nadie
     myMark:-1, //-1 es no definido
@@ -10,13 +11,13 @@ var app = {
     },
 
     listenSocket:function(){
-        var socket = io.connect(this.serverUrl); //creating socket connection
+        //var socket = io.connect(this.serverUrl); //creating socket connection
         //var userName=-1;//nombre de usuario local
-        socket.on('users connected', function(data){
+        app.socket.on('users connected', function(data){
             $('#usersConnected').html(data); //mostrando usuarios conectados
         }); 
 
-        socket.on('users list',function(connectedUsers){
+        app.socket.on('users list',function(connectedUsers){
             //var valores=connectedUsers;
             //debugger;
             $('#selectVersus').children('option:not(:first)').remove(); //limpiando todos los valores, menos el primero
@@ -29,17 +30,17 @@ var app = {
 
         });
 
-        socket.on('start game', function(data){ //data contiene los nombres de los jugadores
+        app.socket.on('start game', function(data){ //data contiene los nombres de los jugadores
                 var play=confirm(data.contender+' quiere jugar contigo...')||false;
                 if(play==true){//si acepta jugar 
-                    socket.emit('game started',data); //le indicamos al server que el juego inicio
+                    app.socket.emit('game started',data); //le indicamos al server que el juego inicio
                     $("#selectVersus").val(data.contender.toString()); //mostramos el nombre del contrincante
                     $("#selectVersus").prop('disabled',true);//desabilitamos el select
                     $('#btnFight').prop('disabled', true);  //desabilitamos boton
                 } //si no acepta hacer, hacer algo     
         });
 
-        socket.on('contender firstmove', function(data){ //data contiene los nombres y ids de los jugadores 
+        app.socket.on('contender firstmove', function(data){ //data contiene los nombres y ids de los jugadores 
             //ocurre en lado del Contender
             alert(data.rivalName+' ha aceptado Jugar... ¡realiza el primer movimiento!');
             $("#selectVersus").val(data.rivalName.toString()); //mostramos el nombre del rival
@@ -53,13 +54,13 @@ var app = {
             //*****************
         });
 
-        socket.on('rival setplayers', function(data){ //data contiene los nombres y ids de los jugadores
+        app.socket.on('rival setplayers', function(data){ //data contiene los nombres y ids de los jugadores
             //Ocurre en el lado del Rival
             app.players=data; //guardamos los datos de los jugadores en memoria local del Rival 
             app.myMark=data.rivalMark;//guardamos marca del Rival     
         });   
 
-        socket.on('playing', function(data){ //data
+        app.socket.on('playing', function(data){ //data
             //marcado el movimiento del jugador anterior en nuestro tablero
             $('#'+data.markedPosition.toString()).html('<span class="uk-text-large uk-text-bold">'+data.mark+'</span>');
             UIkit.notification("Es tu turno!", {timeout: 1500});
@@ -73,7 +74,7 @@ var app = {
                     UIkit.notification("<span class='uk-text-capitalize'>Escriba nombre de usuario</span>", {status: 'danger'});
                     app.myUserName=-1;
                 }else{
-                    socket.emit('user loging',app.myUserName);
+                    app.socket.emit('user loging',app.myUserName);
                     $('#txtUserName').prop('disabled', true); //Desabilitando el input
                     $('#btnLogin').prop('disabled',true);//disabling btnLogin
                     $('#btnLogout').prop('disabled',false); 
@@ -96,7 +97,7 @@ var app = {
             var rival=$('#selectVersus').val() || "0";  
             if (rival!=="0"){ //se intenta configurar la pelea
                 $('#btnFight').prop('disabled', true); 
-                socket.emit('play with',{rivalName:rival,contender:app.myUserName}); //enviando el nombre del rival a retar                    
+                app.socket.emit('play with',{rivalName:rival,contender:app.myUserName}); //enviando el nombre del rival a retar                    
             }  
 
         });       
@@ -131,7 +132,7 @@ var app = {
                 }
 
                 //enviamos posicion y id del siguiente jugador para que tambien se aplique la seleccion en su tablero
-                socket.emit('next player',nextPlayer); 
+                app.socket.emit('next player',nextPlayer); 
             }else{ //¿que pasa si intenta colocar en marca en espacio ocupado? 
                 alert("Esta posición ya fue seleccionada");
             } 
