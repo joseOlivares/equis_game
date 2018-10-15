@@ -85,9 +85,7 @@ var app = {
                     $('#p'+i+j).html('<span class="uk-icon" uk-icon="icon: happy"></span>'); 
                 }
 
-                if(areBtnDisabled==true){
-                    $('#p'+i+j).prop('disabled',isDisabled); 
-                }
+                $('#p'+i+j).prop('disabled',areBtnDisabled); //it can be true or false
             }       
         }
     },
