@@ -33,12 +33,18 @@ io.on('connection', function(socket){
 
 			console.log('An user connected... '+userName.toString());
 			io.sockets.emit('users list', connectedUsers); // enviando listado de todos los usuarios conectados
-		}
+		} // falta emitir mensaje cuando nombre de usuario ya existe
 
 	});
 
 
-	socket.on('playwith', function(data){ //enviando invitacion a jugar
+	socket.on('play with', function(data){ //enviando invitacion a jugar
+		var idRival=searchUser(data.rivalName);//buscando id
+		socket.broadcast.to(idRival).emit('start game',data);//invitando al rival
+	});
+ 
+
+	socket.on('game started', function(data){ //enviando invitacion a jugar
 		var idRival=searchUser(data.rivalName);//buscando id
 		socket.broadcast.to(idRival).emit('start game',data);//invitando al rival
 	});

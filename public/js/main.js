@@ -28,7 +28,7 @@ var app = {
         socket.on('start game', function(data){
                 var play=confirm(data.contender+' quiere jugar contigo...')||false;
                 if(play===true){//si acepta jugar 
-                    socket.emit('game started',data); 
+                    socket.emit('game started',data); //le indicamos al server que el juego inicio
                 } //si no acepta hacer, hacer algo     
         });
 
