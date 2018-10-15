@@ -33,6 +33,7 @@ var app = {
                     socket.emit('game started',data); //le indicamos al server que el juego inicio
                     $("#selectVersus").val(data.contender.toString()); //mostramos el nombre del contrincante
                     $("#selectVersus").prop('disabled',true);//desabilitamos el select
+                    $('#btnFight').prop('disabled', true);  //desabilitamos boton
                 } //si no acepta hacer, hacer algo     
         });
 
@@ -40,8 +41,8 @@ var app = {
             alert(data.rivalName+' ha aceptado Jugar... realiza el primer movimiento');
             $("#selectVersus").val(data.rivalName.toString()); //mostramos el nombre del rival
             $("#selectVersus").prop('disabled',true);//desabilitamos el select
-            this.prepareBoard(false,false); //habilitamos el tablero para que seleccione una posicion.
-
+            app.prepareBoard(false,false); //habilitamos el tablero para que Contender seleccione una posicion.
+            app.players=data; //guardamos los datos de los jugadores en memoria local
         });        
 
         $('#btnLogin').on('click',function(){
