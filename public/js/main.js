@@ -61,7 +61,7 @@ var app = {
             var rival=$('#selectVersus').val() || "0";  
             if (rival!=="0"){ //se intenta configurar la pelea
                 $('#btnFight').prop('disabled', true); 
-                socket.emit('playwith',{rivalName:rival,contender:userName}); //enviando el nombre del rival con quien jugar                    
+                socket.emit('play with',{rivalName:rival,contender:userName}); //enviando el nombre del rival con quien jugar                    
             }  
 
         });       
