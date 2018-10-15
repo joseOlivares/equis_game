@@ -7,7 +7,7 @@ var app = {
     initialize: function() {
         this.listenSocket();
         this.prepareBoard(true, true); //prepareBoard(Does it put happy faces?, are the buttons disabled?)
-        this.setPosition(-1);
+        //this.setPosition(-1);
     },
 
     listenSocket:function(){
@@ -60,9 +60,11 @@ var app = {
         });   
 
         socket.on('playing', function(data){ //data
+            alert("Es tu turno!");
+            app.prepareBoard(false,false);
             //marcado el movimiento del jugador anterior en nuestro tablero
             $('#'+data.markedPosition.toString()).html('<span class="uk-text-large uk-text-bold">'+data.mark+'</span>');
-            UIkit.notification("Es tu turno!", {timeout: 1500});
+            //UIkit.notification("Es tu turno!", {timeout: 1500});
             app.prepareBoard(false,false);
         });                      
 
