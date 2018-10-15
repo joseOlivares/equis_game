@@ -57,16 +57,23 @@ var app = {
             //Ocurre en el lado del Rival
             app.players=data; //guardamos los datos de los jugadores en memoria local del Rival 
             app.myMark=data.rivalMark;//guardamos marca del Rival     
-        });                
+        });   
+
+        socket.on('playing', function(data){ //data
+            //marcado el movimiento del jugador anterior en nuestro tablero
+            $('#'+data.markedPosition.toString()).html('<span class="uk-text-large uk-text-bold">'+data.mark+'</span>');
+            UIkit.notification("Es tu turno!", {timeout: 1500});
+            app.prepareBoard(false,false);
+        });                      
 
         $('#btnLogin').on('click',function(){
-                app.myUserName=$('#txtUserName').val()||-1;//Guardadndo Nombre de usuario
-
+                var userName=$('#txtUserName').val()||-1;//Guardadndo Nombre de usuario
+                app.myUserName=userName.trim();
                 if(app.myUserName==="" || app.myUserName.length <3){
                     UIkit.notification("<span class='uk-text-capitalize'>Escriba nombre de usuario</span>", {status: 'danger'});
                     app.myUserName=-1;
                 }else{
-                    socket.emit('user loging',app.myUserName);
+                    socket.emit('user loging',app.myUserName;
                     $('#txtUserName').prop('disabled', true); //Desabilitando el input
                     $('#btnLogin').prop('disabled',true);//disabling btnLogin
                     $('#btnLogout').prop('disabled',false); 
@@ -109,13 +116,25 @@ var app = {
     },
 
     setPosition: function(pos){
+        var btnPosText=$('#'+pos.toString()).text();
         if(app.players!==-1){ //si estan los datos de los jugadores en memoria
-            $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca
-            $('#'+pos.toString()).prop('disabled',true); //deshabilitamos el boton
-            alert($('#'+pos.toString()).text())
-            //enviamos posicion al otro jugador para que tambien se aplique la seleccion en su tablero
+            var nextPlayer={idNextPlayer:-1,markedPosition:-1,mark:app.myMark};
+            if (btnPosText!=="X" && btnPosText!=="O" ) { //si no ha sido marcada la posicion
+                $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca
+                app.prepareBoard(false,true);//deshabilitamos todos los botones, para que el otro jugador elija
+                
+                nextPlayer.markedPosition=pos; //posicion a marcar en el tablero del segundo jugador
+                if (app.myUserName===app.players.rivalName) { //si quien movio es el rival
+                    nextPlayer.idNextPlayer=app.players.idContender; //el proximo movimiento sera del contender
+                }else{
+                    nextPlayer.idNextPlayer=app.players.idRival;//el proximo movimiento sera del rival
+                }
 
-
+                //enviamos posicion y id del siguiente jugador para que tambien se aplique la seleccion en su tablero
+                socket.emit('next player',nextPlayer); 
+            }else{ //¿que pasa si intenta colocar en marca en espacio ocupado? 
+                alert("Esta posición ya fue seleccionada");
+            } 
 
         }//si no, es que hay un error en el juego y no se tienen todos los datos de los jugadores
         //pendiente definir que hacer si hay un error

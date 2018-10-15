@@ -55,6 +55,9 @@ io.on('connection', function(socket){
 		socket.broadcast.to(idRival).emit('rival setplayers',data); //seteando datos de jugadores en memoria del Rival 
 	});
  
+ 	socket.on('next player', function(data){ //enviando invitacion a jugar
+		socket.broadcast.to(data.idNextPlayer).emit('playing',data);//invitando al rival
+	});
 
     socket.on('disconnect', function () {
         socketCount--; // Decrease the socket count on a disconnect
