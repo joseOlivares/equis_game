@@ -1,4 +1,3 @@
-var socket = io.connect('https://equisgame.herokuapp.com/'); //creating socket connection
 var app = {
     serverUrl:'https://equisgame.herokuapp.com/',
     myUserName:-1, //-1 es no definido
@@ -6,13 +5,13 @@ var app = {
     myMark:-1, //-1 es no definido
     // Application Constructor
     initialize: function() {
+        var socket = io.connect(this.serverUrl); //creating socket connection
         this.listenSocket();
         this.prepareBoard(true, true); //prepareBoard(Does it put happy faces?, are the buttons disabled?)
     },
 
     listenSocket:function(){
         //var socket = io.connect(this.serverUrl); //creating socket connection
-        //var userName=-1;//nombre de usuario local
         socket.on('users connected', function(data){
             $('#usersConnected').html(data); //mostrando usuarios conectados
         }); 
