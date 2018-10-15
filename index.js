@@ -40,13 +40,15 @@ io.on('connection', function(socket){
 
 	socket.on('play with', function(data){ //enviando invitacion a jugar
 		var idRival=searchUser(data.rivalName);//buscando id
+		data.idRival=idRival; //adicionando el idRival a data para no tener que buscarlo nuevamente
 		socket.broadcast.to(idRival).emit('start game',data);//invitando al rival
 	});
  
 
-	socket.on('game started', function(data){ //enviando invitacion a jugar
-		var idRival=searchUser(data.rivalName);//buscando id
-		socket.broadcast.to(idRival).emit('start game',data);//invitando al rival
+	socket.on('game started', function(data){ //recibiendo datos de los jugadores para comenzar a jugar
+		var idContender=searchUser(data.contender);
+		data.idContender=idContender;//adicionando el idContender a data para no tener que buscarlo nuevamente
+		socket.broadcast.to(idContender).emit('first move',data);//invitando al rival
 	});
  
 

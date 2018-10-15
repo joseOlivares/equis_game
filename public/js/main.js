@@ -25,9 +25,9 @@ var app = {
 
         });
 
-        socket.on('start game', function(data){
+        socket.on('start game', function(data){ //data contiene los nombres de los jugadores
                 var play=confirm(data.contender+' quiere jugar contigo...')||false;
-                if(play===true){//si acepta jugar 
+                if(play==true){//si acepta jugar 
                     socket.emit('game started',data); //le indicamos al server que el juego inicio
                 } //si no acepta hacer, hacer algo     
         });
@@ -61,7 +61,7 @@ var app = {
             var rival=$('#selectVersus').val() || "0";  
             if (rival!=="0"){ //se intenta configurar la pelea
                 $('#btnFight').prop('disabled', true); 
-                socket.emit('play with',{rivalName:rival,contender:userName}); //enviando el nombre del rival con quien jugar                    
+                socket.emit('play with',{rivalName:rival,contender:userName}); //enviando el nombre del rival a retar                    
             }  
 
         });       
