@@ -22,7 +22,7 @@ var app = {
 
         });
 
-        socket.on('start game', functio(data){
+        socket.on('start game', function(data){
                alert('Juego iniciado');
         });
 
