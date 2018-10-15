@@ -35,10 +35,9 @@ io.on('connection', function(socket){
 	});
 
 
-	socket.on('playwith', function(data){ ///AQUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIi
-		console.log('****Rival '+data.rivalName);
-		//var idRival=searchUser(data.rivalName);//buscando id
-		//socket.broadcast.to(idRival).emit('start game',data);//invitando al rival
+	socket.on('playwith', function(data){ //enviando invitacion a jugar
+		var idRival=searchUser(data.rivalName);//buscando id
+		socket.broadcast.to(idRival).emit('start game',data);//invitando al rival
 	});
  
 
