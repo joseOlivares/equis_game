@@ -7,7 +7,7 @@ var app = {
     initialize: function() {
         this.listenSocket();
         this.prepareBoard(true, true); //prepareBoard(Does it put happy faces?, are the buttons disabled?)
-        //this.setPosition(-1);
+        this.setPosition();
     },
 
     listenSocket:function(){
@@ -118,28 +118,30 @@ var app = {
     },
 
     setPosition: function(pos){
-        var btnPosText=$('#'+pos.toString()).text();
-        if(app.players!==-1){ //si estan los datos de los jugadores en memoria
-            var nextPlayer={idNextPlayer:-1,markedPosition:-1,mark:app.myMark};
-            if (btnPosText!=="X" && btnPosText!=="O" ) { //si no ha sido marcada la posicion
-                $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca
-                app.prepareBoard(false,true);//deshabilitamos todos los botones, para que el otro jugador elija
-                
-                nextPlayer.markedPosition=pos; //posicion a marcar en el tablero del segundo jugador
-                if (app.myUserName===app.players.rivalName) { //si quien movio es el rival
-                    nextPlayer.idNextPlayer=app.players.idContender; //el proximo movimiento sera del contender
-                }else{
-                    nextPlayer.idNextPlayer=app.players.idRival;//el proximo movimiento sera del rival
-                }
+        if(pos){
+            var btnPosText=$('#'+pos.toString()).text();
+            if(app.players!==-1){ //si estan los datos de los jugadores en memoria
+                var nextPlayer={idNextPlayer:-1,markedPosition:-1,mark:app.myMark};
+                if (btnPosText!=="X" && btnPosText!=="O" ) { //si no ha sido marcada la posicion
+                    $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca
+                    app.prepareBoard(false,true);//deshabilitamos todos los botones, para que el otro jugador elija
+                    
+                    nextPlayer.markedPosition=pos; //posicion a marcar en el tablero del segundo jugador
+                    if (app.myUserName===app.players.rivalName) { //si quien movio es el rival
+                        nextPlayer.idNextPlayer=app.players.idContender; //el proximo movimiento sera del contender
+                    }else{
+                        nextPlayer.idNextPlayer=app.players.idRival;//el proximo movimiento sera del rival
+                    }
 
-                //enviamos posicion y id del siguiente jugador para que tambien se aplique la seleccion en su tablero
-                socket.emit('next player',nextPlayer); 
-            }else{ //¿que pasa si intenta colocar en marca en espacio ocupado? 
-                alert("Esta posición ya fue seleccionada");
-            } 
+                    //enviamos posicion y id del siguiente jugador para que tambien se aplique la seleccion en su tablero
+                    socket.emit('next player',nextPlayer); 
+                }else{ //¿que pasa si intenta colocar en marca en espacio ocupado? 
+                    alert("Esta posición ya fue seleccionada");
+                } 
 
-        }//si no, es que hay un error en el juego y no se tienen todos los datos de los jugadores
-        //pendiente definir que hacer si hay un error
+            }//si no, es que hay un error en el juego y no se tienen todos los datos de los jugadores
+            //pendiente definir que hacer si hay un error
+        }
     }
 
 };
