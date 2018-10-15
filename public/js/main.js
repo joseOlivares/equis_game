@@ -5,9 +5,9 @@ var app = {
     myMark:-1, //-1 es no definido
     // Application Constructor
     initialize: function() {
-        var socket = io.connect(this.serverUrl); //creating socket connection
         this.listenSocket();
         this.prepareBoard(true, true); //prepareBoard(Does it put happy faces?, are the buttons disabled?)
+        this.setPosition(-1);
     },
 
     listenSocket:function(){
