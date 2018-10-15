@@ -41,12 +41,16 @@ var app = {
 
         socket.on('contender firstmove', function(data){ //data contiene los nombres y ids de los jugadores 
             //ocurre en lado del Contender
-            alert(data.rivalName+' ha aceptado Jugar... realiza el primer movimiento');
+            alert(data.rivalName+' ha aceptado Jugar... ¡realiza el primer movimiento!');
             $("#selectVersus").val(data.rivalName.toString()); //mostramos el nombre del rival
             $("#selectVersus").prop('disabled',true);//desabilitamos el select
             app.prepareBoard(false,false); //habilitamos el tablero para que Contender seleccione una posicion.
             app.players=data; //guardamos los datos de los jugadores en memoria local del contender, es un Json
             app.myMark=data.contenderMark; //guardamos marca del Contender 
+            //**************************
+            //aqui esperamos hasta que el contender de clic en algun botón indicando su posición a elegir
+            //se debe disparar app.setPosition();
+            //*****************
         });
 
         socket.on('rival setplayers', function(data){ //data contiene los nombres y ids de los jugadores
@@ -108,6 +112,9 @@ var app = {
         if(app.players!==-1){ //si estan los datos de los jugadores en memoria
             $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca
             $('#'+pos.toString()).prop('disabled',true); //deshabilitamos el boton
+            alert($('#'+pos.toString()).text())
+            //enviamos posicion al otro jugador para que tambien se aplique la seleccion en su tablero
+
 
 
         }//si no, es que hay un error en el juego y no se tienen todos los datos de los jugadores
