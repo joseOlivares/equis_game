@@ -45,7 +45,7 @@ io.on('connection', function(socket){
  
 
     socket.on('disconnect', function () {
-        socketCount-=1; // Decrease the socket count on a disconnect
+        socketCount--; // Decrease the socket count on a disconnect
         var userDisconnected="";
 	    for(var i=0; i < connectedUsers.length; i++){  //deletng users desconnected   
 	        if(connectedUsers[i].id === socket.id){
