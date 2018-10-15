@@ -13,8 +13,8 @@ var app = {
         }); 
 
         socket.on('users list',function(connectedUsers){
-            var valores=connectedUsers;
-            debugger;
+            //var valores=connectedUsers;
+            //debugger;
             $('#selectVersus').children('option:not(:first)').remove(); //limpiando todos los valores, menos el primero
 
             for (var i = 0; i < connectedUsers.length; i++) {
