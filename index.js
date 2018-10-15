@@ -33,7 +33,8 @@ io.on('connection', function(socket){
 
 			console.log('An user connected... '+userName.toString());
 			io.sockets.emit('users list', connectedUsers); // enviando listado de todos los usuarios conectados
-		} // falta emitir mensaje cuando nombre de usuario ya existe
+		} 
+		// falta emitir mensaje cuando nombre de usuario ya existe y solucionar problema
 
 	});
 
@@ -50,7 +51,8 @@ io.on('connection', function(socket){
 		var idContender=searchUser(data.contender);
 		data.idContender=idContender;//adicionando el idContender a data para no tener que buscarlo nuevamente
 		data.contenderMark="X"; 
-		socket.broadcast.to(idContender).emit('first move',data);//invitando al contender a hacer el primer movimiento
+		socket.broadcast.to(idContender).emit('contender firstmove',data);//invitando al contender a hacer el primer movimiento, setando jugadores 
+		socket.broadcast.to(idRival).emit('rival setplayers',data); //seteando datos de jugadores en memoria del Rival 
 	});
  
 

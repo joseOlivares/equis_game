@@ -1,6 +1,8 @@
 var app = {
     serverUrl:'https://equisgame.herokuapp.com/',
+    myUserName:-1, //-1 es no definido
     players:-1, //inicializando -1 es nadie
+    myMark:-1, //-1 es no definido
     // Application Constructor
     initialize: function() {
         this.listenSocket();
@@ -9,7 +11,7 @@ var app = {
 
     listenSocket:function(){
         var socket = io.connect(this.serverUrl); //creating socket connection
-        var userName=-1;
+        //var userName=-1;//nombre de usuario local
         socket.on('users connected', function(data){
             $('#usersConnected').html(data); //mostrando usuarios conectados
         }); 
@@ -20,7 +22,7 @@ var app = {
             $('#selectVersus').children('option:not(:first)').remove(); //limpiando todos los valores, menos el primero
 
             for (var i = 0; i < connectedUsers.length; i++) {
-                if(connectedUsers[i].userName!==userName){
+                if(connectedUsers[i].userName!==app.myUserName){
                     $('#selectVersus').append($('<option>',{ value:connectedUsers[i].userName,text:connectedUsers[i].userName}));
                 }
             }
@@ -37,28 +39,37 @@ var app = {
                 } //si no acepta hacer, hacer algo     
         });
 
-        socket.on('first move', function(data){ //data contiene los nombres y ids de los jugadores
+        socket.on('contender firstmove', function(data){ //data contiene los nombres y ids de los jugadores 
+            //ocurre en lado del Contender
             alert(data.rivalName+' ha aceptado Jugar... realiza el primer movimiento');
             $("#selectVersus").val(data.rivalName.toString()); //mostramos el nombre del rival
             $("#selectVersus").prop('disabled',true);//desabilitamos el select
             app.prepareBoard(false,false); //habilitamos el tablero para que Contender seleccione una posicion.
-            app.players=data; //guardamos los datos de los jugadores en memoria local, es un Json
-        });        
+            app.players=data; //guardamos los datos de los jugadores en memoria local del contender, es un Json
+            app.myMark=data.contenderMark; //guardamos marca del Contender 
+        });
+
+        socket.on('rival setplayers', function(data){ //data contiene los nombres y ids de los jugadores
+            //Ocurre en el lado del Rival
+            app.players=data; //guardamos los datos de los jugadores en memoria local del Rival 
+            app.myMark=data.rivalMark;//guardamos marca del Rival     
+        });                
 
         $('#btnLogin').on('click',function(){
-                userName=$('#txtUserName').val();//Nombre de usuario
+                app.myUserName=$('#txtUserName').val()||-1;//Guardadndo Nombre de usuario
 
-                if(userName==="" || userName.length <3){
+                if(app.myUserName==="" || app.myUserName.length <3){
                     UIkit.notification("<span class='uk-text-capitalize'>Escriba nombre de usuario</span>", {status: 'danger'});
+                    app.myUserName=-1;
                 }else{
-                    socket.emit('user loging',userName);
+                    socket.emit('user loging',app.myUserName);
                     $('#txtUserName').prop('disabled', true); //Desabilitando el input
                     $('#btnLogin').prop('disabled',true);//disabling btnLogin
                     $('#btnLogout').prop('disabled',false); 
                     $('#selectVersus').prop('disabled',false);
                     $('#divVersus').prop('hidden',false);   //haciendo visible
                     $('#divLogin').addClass('uk-invisible');//ocultando login
-                    $('#divMyUser').html(userName);                        
+                    $('#divMyUser').html(app.myUserName);                        
                 }
         }); 
 
@@ -74,7 +85,7 @@ var app = {
             var rival=$('#selectVersus').val() || "0";  
             if (rival!=="0"){ //se intenta configurar la pelea
                 $('#btnFight').prop('disabled', true); 
-                socket.emit('play with',{rivalName:rival,contender:userName}); //enviando el nombre del rival a retar                    
+                socket.emit('play with',{rivalName:rival,contender:app.myUserName}); //enviando el nombre del rival a retar                    
             }  
 
         });       
@@ -94,7 +105,13 @@ var app = {
     },
 
     setPosition: function(pos){
-        alert(pos);
+        if(app.players!==-1){ //si estan los datos de los jugadores en memoria
+            $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca
+            $('#'+pos.toString()).prop('disabled',true); //deshabilitamos el boton
+
+
+        }//si no, es que hay un error en el juego y no se tienen todos los datos de los jugadores
+        //pendiente definir que hacer si hay un error
     }
 
 };
