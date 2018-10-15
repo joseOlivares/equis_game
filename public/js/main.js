@@ -22,9 +22,9 @@ var app = {
 
         });
 
-        socket.on('start game'){
+        socket.on('start game', functio(data){
                alert('Juego iniciado');
-        };
+        });
 
         $('#btnLogin').on('click',function(){
                 userName=$('#txtUserName').val();//Nombre de usuario
