@@ -52,14 +52,15 @@ io.on('connection', function(socket){
 		var idContender=searchUser(data.contender);
 		data.idContender=idContender;//adicionando el idContender a data para no tener que buscarlo nuevamente
 		data.contenderMark="X"; 
-		socket.broadcast.to(idContender).emit('contender firstmove',data);//invitando al contender a hacer el primer movimiento, setando jugadores 
-		
-		var idRival=data.idRival.toString();
-		socket.broadcast.to(idRival).emit('rival setplayers',data); //seteando datos de jugadores en memoria del Rival 
-		
+		//invitando al contender a hacer el primer movimiento, setando jugadores en ambiente del contender	
+		socket.broadcast.to(idContender).emit('contender firstmove',data);
 		console.log("===========Entro en game started");
 		console.log("idContender="+data.idContender+" ContenderMark="+data.contenderMark);
 		console.log("idRival="+data.idRival+" rivalMark="+data.rivalMark);
+	});
+
+	socket.on('config rival',function(data){
+		socket.broadcast.to(data.idRival).emit('rival setplayers',data); //seteando datos de jugadores en memoria del Rival 
 	});
  
  	socket.on('next player', function(data){ //enviando invitacion a jugar

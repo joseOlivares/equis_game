@@ -29,14 +29,16 @@ var app = {
 
         });
 
-        socket.on('start game', function(data){ //data contiene los nombres de los jugadores
+        socket.on('start game', function(data){ //data contiene los nombres de los jugadores (solo para Rival)
                 var play=confirm(data.contender+' quiere jugar contigo...')||false;
                 if(play==true){//si acepta jugar 
                     socket.emit('game started',data); //le indicamos al server que el juego inicio
                     $("#selectVersus").val(data.contender.toString()); //mostramos el nombre del contrincante
                     $("#selectVersus").prop('disabled',true);//desabilitamos el select
                     $('#btnFight').prop('disabled', true);  //desabilitamos boton
-
+                    //app.myMark=data.rivalMark;
+                    
+                    //data.idRival
                 } //si no acepta hacer, hacer algo     
         });
 
@@ -48,6 +50,9 @@ var app = {
             app.prepareBoard(false,false); //habilitamos el tablero para que Contender seleccione una posicion.
             app.players=data; //guardamos los datos de los jugadores en memoria local del contender, es un Json
             app.myMark=data.contenderMark; //guardamos marca del Contender 
+
+            socket.emit('config rival',data); //enviando datos de los usuarios para que los almacene el rival
+
             //**************************
             //aqui esperamos hasta que el contender de clic en algun botón indicando su posición a elegir
             //se debe disparar app.setPosition();
@@ -55,8 +60,7 @@ var app = {
         });
 
         socket.on('rival setplayers', function(data){ //data contiene los nombres y ids de los jugadores
-            //Ocurre en el lado del Rival
-            debugger;
+            //Ocurre solo en el lado del Rival
             app.players=data; //guardamos los datos de los jugadores en memoria local del Rival 
             app.myMark=data.rivalMark;//guardamos marca del Rival 
             debugger;    
