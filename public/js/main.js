@@ -184,44 +184,47 @@ function evaluateGame(playerMark){
     var p21=$('#p11').text();
     var p22=$('#p12').text();
 
-    var test="";
+    var test1=p00+p01+p02, test2=p10+p11+p12, test3=p20+p21+p22;
+    var test4=p00+p10+p20, test5=p01+p11+p21, test6=p02+p12+p22;
+    var test7=p00+p11+p22, test8=p02+p11+p02;
+
     debugger;
     switch (mk) {
-        case (p00+p01+p02):
+        case test1:
             alert("Ganador "+playerMark);
             return true
             break;
-        case (p10+p11+p12):
+        case test2:
             alert("Ganador "+playerMark);
             return true            
             break;
 
-        case (p20+p21+p22):
+        case test3:
             alert("Ganador "+playerMark);
             return true            
             break;
 
-        case (p00+p10+p20) :
+        case test4 :
             alert("Ganador "+playerMark);
             return true            
             break;  
 
-        case (p01+p11+p21):
+        case test5:
             alert("Ganador "+playerMark);
             return true            
             break;
 
-        case (p02+p12+p22):
+        case test6:
             alert("Ganador "+playerMark);
             return true            
             break;
 
-        case (p00+p11+p22):
+        case test7:
             alert("Ganador "+playerMark);
             return true            
             break;
 
-        case (p02+p11+p02):
+        case test8:
             alert("Ganador "+playerMark);
             return true            
             break;
