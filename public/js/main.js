@@ -67,10 +67,9 @@ var app = {
 
         socket.on('playing', function(data){ //data
             app.prepareBoard(false,false);
-            alert("¡Es tu turno!");
             //marcado el movimiento del jugador anterior en nuestro tablero
             $('#'+data.markedPosition.toString()).html('<span class="uk-text-large uk-text-bold">'+data.mark+'</span>');
-
+            alert("¡Es tu turno!");
         });                      
 
         $('#btnLogin').on('click',function(){
@@ -98,6 +97,12 @@ var app = {
                 $('#divVersus').prop('hidden',true);
                 $('#divLogin').removeClass('uk-invisible');//mostrando login
                 location.reload();
+        });
+
+        $("#selectVersus").change(function() {
+            if($('#selectVersus').val()!=="0"){
+                $('#btnFight').prop('disabled',false);                
+            }
         }); 
 
         $('#btnFight').on('click',function(){  
