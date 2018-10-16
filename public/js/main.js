@@ -63,7 +63,7 @@ var app = {
             //Ocurre solo en el lado del Rival
             app.players=data; //guardamos los datos de los jugadores en memoria local del Rival 
             app.myMark=data.rivalMark;//guardamos marca del Rival 
-            debugger;    
+            //debugger;    
         });   
 
         socket.on('playing', function(data){ //data
