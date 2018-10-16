@@ -68,6 +68,11 @@ io.on('connection', function(socket){
 		console.log("===========Entro en next player");
 	});
 
+ 	socket.on('game over', function(data){ //enviando invitacion a jugar
+		socket.broadcast.to(data.idLoser).emit('you lose',data);//invitando al rival
+		console.log("===========Entro en game over");
+	});
+
     socket.on('disconnect', function () {
         socketCount--; // Decrease the socket count on a disconnect
         var userDisconnected="Nothing";

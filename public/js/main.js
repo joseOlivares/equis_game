@@ -3,6 +3,8 @@ var app = {
     myUserName:-1, //-1 es no definido
     players:-1, //inicializando -1 es nadie
     myMark:-1, //-1 es no definido
+    myId:-1,
+    player2Id:-1,
     // Application Constructor
     initialize: function() {
         this.listenSocket();
@@ -49,7 +51,10 @@ var app = {
             app.prepareBoard(false,false); //habilitamos el tablero para que Contender seleccione una posicion.
             app.players=data; //guardamos los datos de los jugadores en memoria local del contender, es un Json
             app.myMark=data.contenderMark; //guardamos marca del Contender 
-
+            
+            app.myId=data.idContender; //guardado id en memoria local
+            app.player2Id=data.idRival;//guardadndo id del segudno jugador
+            
             socket.emit('config rival',data); //enviando datos de los usuarios para que los almacene el rival
 
             //**************************
@@ -62,6 +67,10 @@ var app = {
             //Ocurre solo en el lado del Rival
             app.players=data; //guardamos los datos de los jugadores en memoria local del Rival 
             app.myMark=data.rivalMark;//guardamos marca del Rival 
+            
+            //guardando ids de jugadores en memoria local
+            app.myId=data.idRival;
+            app.player2Id=data.idContender;
             //debugger;    
         });   
 
@@ -70,6 +79,11 @@ var app = {
             //marcado el movimiento del jugador anterior en nuestro tablero
             $('#'+data.markedPosition.toString()).html('<span class="uk-text-large uk-text-bold">'+data.mark+'</span>');
             alert("¡Es tu turno!");
+        });
+
+        socket.on('you lose',function(data){
+            alert("¡Perdiste!");
+            app.prepareBoard(true,true);
         });                      
 
         $('#btnLogin').on('click',function(){
@@ -139,20 +153,22 @@ var app = {
                     $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca
                     app.prepareBoard(false,true);//deshabilitamos todos los botones, para que el otro jugador elija
                     
-                    var win=evaluateGame(app.myMark);//Evaluando el estado del Juego!
-                    /*if(win===true){
-                        return true;
-                    }*/
-
-                    nextPlayer.markedPosition=pos; //posicion a marcar en el tablero del segundo jugador
-                    if (app.myUserName===app.players.rivalName) { //si quien movio es el rival
-                        nextPlayer.idNextPlayer=app.players.idContender; //el proximo movimiento sera del contender
+                    if(evaluateGame(app.myMark)){//Evaluando el estado del Juego!
+                        socket.emit('game over',{idWinner:app.myId,idLoser:app.player2Id});
+                        alert("¡Felicidades ganaste!");
+                        app.prepareBoard(true,true);
+                        //definir que hace cuando usuario local gana el juego
                     }else{
-                        nextPlayer.idNextPlayer=app.players.idRival;//el proximo movimiento sera del rival
+                        nextPlayer.markedPosition=pos; //posicion a marcar en el tablero del segundo jugador
+                        if (app.myUserName===app.players.rivalName) { //si quien movio es el rival
+                            nextPlayer.idNextPlayer=app.players.idContender; //el proximo movimiento sera del contender
+                        }else{
+                            nextPlayer.idNextPlayer=app.players.idRival;//el proximo movimiento sera del rival
+                        }
+                        //enviamos posicion y id del siguiente jugador para que tambien se aplique la seleccion en su tablero
+                        socket.emit('next player',nextPlayer); 
                     }
 
-                    //enviamos posicion y id del siguiente jugador para que tambien se aplique la seleccion en su tablero
-                    socket.emit('next player',nextPlayer); 
                 }else{ //¿que pasa si intenta colocar en marca en espacio ocupado? 
                     alert("Esta posición ya fue seleccionada");
                 } 
