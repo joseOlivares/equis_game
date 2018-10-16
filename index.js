@@ -55,6 +55,8 @@ io.on('connection', function(socket){
 		socket.broadcast.to(idContender).emit('contender firstmove',data);//invitando al contender a hacer el primer movimiento, setando jugadores 
 		socket.broadcast.to(data.idRival).emit('rival setplayers',data); //seteando datos de jugadores en memoria del Rival 
 		console.log("===========Entro en game started");
+		console.log("idContender="+data.idContender+" ContenderMark="+data.contenderMark);
+		console.log("idRival="+data.idRival+" rivalMark="+data.rivalMark);
 	});
  
  	socket.on('next player', function(data){ //enviando invitacion a jugar

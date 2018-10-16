@@ -36,6 +36,7 @@ var app = {
                     $("#selectVersus").val(data.contender.toString()); //mostramos el nombre del contrincante
                     $("#selectVersus").prop('disabled',true);//desabilitamos el select
                     $('#btnFight').prop('disabled', true);  //desabilitamos boton
+
                 } //si no acepta hacer, hacer algo     
         });
 
