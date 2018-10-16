@@ -252,10 +252,11 @@ function evaluateGame(playerMark){
 }
 
 function changeColor(btn1,btn2,btn3){
-    $(btn1).removeClass('uk-button-default');
-    $(btn1).addClass('uk-button-danger');
-    $(btn2).removeClass('uk-button-default');
-    $(btn2).addClass('uk-button-danger');    
-    $(btn3).removeClass('uk-button-default');
-    $(btn3).addClass('uk-button-danger');        
+    $(btn1.toString()).removeClass('uk-button-default');
+    $(btn1.toString()).addClass('uk-button-danger');
+    debugger;
+    $(btn2.toString()).removeClass('uk-button-default');
+    $(btn2.toString()).addClass('uk-button-danger');    
+    $(btn3.toString()).removeClass('uk-button-default');
+    $(btn3.toString()).addClass('uk-button-danger');        
 }
