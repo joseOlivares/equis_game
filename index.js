@@ -44,6 +44,7 @@ io.on('connection', function(socket){
 		data.idRival=idRival; //adicionando el idRival a data para no tener que buscarlo nuevamente
 		data.rivalMark="O"; //el rival usará O (equivalente al cero)
 		socket.broadcast.to(idRival).emit('start game',data);//invitando al rival
+		console.log("===========Entro en play with");
 	});
  
 
@@ -53,11 +54,13 @@ io.on('connection', function(socket){
 		data.contenderMark="X"; 
 		socket.broadcast.to(idContender).emit('contender firstmove',data);//invitando al contender a hacer el primer movimiento, setando jugadores 
 		socket.broadcast.to(data.idRival).emit('rival setplayers',data); //seteando datos de jugadores en memoria del Rival 
+		console.log("===========Entro en game started");
 	});
  
  	socket.on('next player', function(data){ //enviando invitacion a jugar
- 		console.log("*********************** next player id "+data.idNextPlayer);
+ 		//console.log("*********************** next player id "+data.idNextPlayer);
 		socket.broadcast.to(data.idNextPlayer).emit('playing',data);//invitando al rival
+		console.log("===========Entro en next player");
 	});
 
     socket.on('disconnect', function () {

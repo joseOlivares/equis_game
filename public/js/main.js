@@ -55,8 +55,10 @@ var app = {
 
         socket.on('rival setplayers', function(data){ //data contiene los nombres y ids de los jugadores
             //Ocurre en el lado del Rival
+            debugger;
             app.players=data; //guardamos los datos de los jugadores en memoria local del Rival 
-            app.myMark=data.rivalMark;//guardamos marca del Rival     
+            app.myMark=data.rivalMark;//guardamos marca del Rival 
+            debugger;    
         });   
 
         socket.on('playing', function(data){ //data
@@ -119,10 +121,10 @@ var app = {
     setPosition: function(pos){
         if(pos){
             var btnPosText=$('#'+pos.toString()).text();
-            debugger;
+
             if(app.players!==-1){ //si estan los datos de los jugadores en memoria
                 var nextPlayer={idNextPlayer:-1,markedPosition:-1,mark:app.myMark};
-                debugger;
+                
                 if (btnPosText!=="X" && btnPosText!=="O" ) { //si no ha sido marcada la posicion
                     $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca
                     app.prepareBoard(false,true);//deshabilitamos todos los botones, para que el otro jugador elija
