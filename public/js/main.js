@@ -188,47 +188,47 @@ function evaluateGame(playerMark){
     var test4=p00+p10+p20, test5=p01+p11+p21, test6=p02+p12+p22;
     var test7=p00+p11+p22, test8=p02+p11+p02;
 
-    debugger;
     switch (mk) {
-        case test1:
+        case test1.trim():
             alert("Ganador "+playerMark);
             return true
             break;
-        case test2:
+        case test2.trim():
             alert("Ganador "+playerMark);
             return true            
             break;
 
-        case test3:
+        case test3.trim():
             alert("Ganador "+playerMark);
             return true            
             break;
 
-        case test4 :
+        case test4.trim() :
             alert("Ganador "+playerMark);
             return true            
             break;  
 
-        case test5:
+        case test5.trim():
             alert("Ganador "+playerMark);
             return true            
             break;
 
-        case test6:
+        case test6.trim():
             alert("Ganador "+playerMark);
             return true            
             break;
 
-        case test7:
+        case test7.trim():
             alert("Ganador "+playerMark);
             return true            
             break;
 
-        case test8:
+        case test8.trim():
             alert("Ganador "+playerMark);
             return true            
             break;
-        default:       
+        default:  
+            debugger;     
         return false;          
     }
 
