@@ -139,7 +139,10 @@ var app = {
                     $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca
                     app.prepareBoard(false,true);//deshabilitamos todos los botones, para que el otro jugador elija
                     
-                    evaluateGame(app.myMark);//Evaluando el estado del Juego!
+                    var win=evaluateGame(app.myMark);//Evaluando el estado del Juego!
+                    if(win===true){
+                        return true;
+                    }
 
                     nextPlayer.markedPosition=pos; //posicion a marcar en el tablero del segundo jugador
                     if (app.myUserName===app.players.rivalName) { //si quien movio es el rival
@@ -184,37 +187,45 @@ function evaluateGame(playerMark){
     var test="";
 
     switch (mk) {
-        case p00+p01+p02:
+        case (p00+p01+p02):
             alert("Ganador "+playerMark);
+            return true
             break;
-        case p10+p11+p12:
+        case (p10+p11+p12):
             alert("Ganador "+playerMark);
-            break;
-
-        case p20+p21+p22:
-            alert("Ganador "+playerMark);
+            return true            
             break;
 
-        case p00+p10+p20 :
+        case (p20+p21+p22):
             alert("Ganador "+playerMark);
+            return true            
+            break;
+
+        case (p00+p10+p20) :
+            alert("Ganador "+playerMark);
+            return true            
             break;  
 
-        case p01+p11+p21:
+        case (p01+p11+p21):
             alert("Ganador "+playerMark);
+            return true            
             break;
 
-        case p02+p12+p22:
+        case (p02+p12+p22):
             alert("Ganador "+playerMark);
+            return true            
             break;
 
-        case p00+p11+p22:
+        case (p00+p11+p22):
             alert("Ganador "+playerMark);
+            return true            
             break;
 
-        case p02+p11+p02:
+        case (p02+p11+p02):
             alert("Ganador "+playerMark);
+            return true            
             break;
-        default:
+        default:       
         return false;          
     }
 
