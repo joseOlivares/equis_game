@@ -97,6 +97,7 @@ var app = {
                 $('#btnLogout').prop('disabled',true);
                 $('#divVersus').prop('hidden',true);
                 $('#divLogin').removeClass('uk-invisible');//mostrando login
+                location.reload();
         }); 
 
         $('#btnFight').on('click',function(){  
