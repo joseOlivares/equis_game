@@ -167,9 +167,9 @@ var app = {
 function evaluateGame(playerMark){
     var mk="";
     if(playerMark==='X'){
-        mk="XXX";
+        mk='XXX';
     }else{
-        mk="OOO";
+        mk='OOO';
     }
 
     var p00=$('#p00').text();
@@ -180,51 +180,51 @@ function evaluateGame(playerMark){
     var p11=$('#p11').text();
     var p12=$('#p12').text();
 
-    var p20=$('#p10').text();
-    var p21=$('#p11').text();
-    var p22=$('#p12').text();
+    var p20=$('#p20').text();
+    var p21=$('#p21').text();
+    var p22=$('#p22').text();
 
     var test1=p00+p01+p02, test2=p10+p11+p12, test3=p20+p21+p22;
     var test4=p00+p10+p20, test5=p01+p11+p21, test6=p02+p12+p22;
-    var test7=p00+p11+p22, test8=p02+p11+p02;
+    var test7=p00+p11+p22, test8=p02+p11+p20;
 
-    switch (mk) {
+    switch (mk) { //evaluando las combinaciones para ganar
         case test1.trim():
-            alert("Ganador "+playerMark);
+            changeColor('#p00','#p01,#p02');
             return true
             break;
         case test2.trim():
-            alert("Ganador "+playerMark);
+            changeColor('#p10','#p11,#p12');        
             return true            
             break;
 
         case test3.trim():
-            alert("Ganador "+playerMark);
+            changeColor('#p20','#p21,#p22');        
             return true            
             break;
 
         case test4.trim() :
-            alert("Ganador "+playerMark);
+            changeColor('#p00','#p10,#p20');        
             return true            
             break;  
 
         case test5.trim():
-            alert("Ganador "+playerMark);
+            changeColor('#p01','#p11,#p21');        
             return true            
             break;
 
         case test6.trim():
-            alert("Ganador "+playerMark);
+            changeColor('#p02','#p12,#p22');        
             return true            
             break;
 
         case test7.trim():
-            alert("Ganador "+playerMark);
+            changeColor('#p00','#p11,#p22');        
             return true            
             break;
 
         case test8.trim():
-            alert("Ganador "+playerMark);
+            changeColor('#p02','#p11,#p20');        
             return true            
             break;
         default:  
@@ -233,4 +233,13 @@ function evaluateGame(playerMark){
     }
 
     return false;
+}
+
+function changeColor(btn1,btn2,btn3){
+    $(btn1).removeClass('uk-button-default');
+    $(btn1).addClass('uk-button-danger');
+    $(btn2).removeClass('uk-button-default');
+    $(btn2).addClass('uk-button-danger');    
+    $(btn3).removeClass('uk-button-default');
+    $(btn3).addClass('uk-button-danger');        
 }
