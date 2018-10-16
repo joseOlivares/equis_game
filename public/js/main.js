@@ -1,5 +1,5 @@
+var socket = io.connect('https://equisgame.herokuapp.com/'); //creating socket connection
 var app = {
-    serverUrl:'https://equisgame.herokuapp.com/',
     myUserName:-1, //-1 es no definido
     players:-1, //inicializando -1 es nadie
     myMark:-1, //-1 es no definido
@@ -7,7 +7,6 @@ var app = {
     initialize: function() {
         this.listenSocket();
         this.prepareBoard(true, true); //prepareBoard(Does it put happy faces?, are the buttons disabled?)
-        //this.setPosition();
     },
 
     listenSocket:function(){
