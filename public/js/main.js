@@ -140,9 +140,9 @@ var app = {
                     app.prepareBoard(false,true);//deshabilitamos todos los botones, para que el otro jugador elija
                     
                     var win=evaluateGame(app.myMark);//Evaluando el estado del Juego!
-                    if(win===true){
+                    /*if(win===true){
                         return true;
-                    }
+                    }*/
 
                     nextPlayer.markedPosition=pos; //posicion a marcar en el tablero del segundo jugador
                     if (app.myUserName===app.players.rivalName) { //si quien movio es el rival
@@ -185,7 +185,7 @@ function evaluateGame(playerMark){
     var p22=$('#p12').text();
 
     var test="";
-
+    debugger;
     switch (mk) {
         case (p00+p01+p02):
             alert("Ganador "+playerMark);
