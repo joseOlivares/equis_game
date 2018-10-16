@@ -7,7 +7,7 @@ var app = {
     initialize: function() {
         this.listenSocket();
         this.prepareBoard(true, true); //prepareBoard(Does it put happy faces?, are the buttons disabled?)
-        this.setPosition();
+        //this.setPosition();
     },
 
     listenSocket:function(){

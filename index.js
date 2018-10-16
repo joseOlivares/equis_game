@@ -64,8 +64,7 @@ io.on('connection', function(socket){
 	});
  
  	socket.on('next player', function(data){ //enviando invitacion a jugar
- 		//console.log("*********************** next player id "+data.idNextPlayer);
-		socket.broadcast.to(data.idNextPlayer.toString()).emit('playing',data);//invitando al rival
+		socket.broadcast.to(data.idNextPlayer).emit('playing',data);//invitando al rival
 		console.log("===========Entro en next player");
 	});
 
