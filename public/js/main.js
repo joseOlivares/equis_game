@@ -206,45 +206,45 @@ function evaluateGame(playerMark){
 
     switch (mk) { //evaluando las combinaciones para ganar
         case test1.trim():
-            changeColor('#p00','#p01,#p02');
+            changeColor('#p00','#p01','#p02');
             return true
             break;
         case test2.trim():
-            changeColor('#p10','#p11,#p12');        
+            changeColor('#p10','#p11','#p12');        
             return true            
             break;
 
         case test3.trim():
-            changeColor('#p20','#p21,#p22');        
+            changeColor('#p20','#p21','#p22');        
             return true            
             break;
 
         case test4.trim() :
-            changeColor('#p00','#p10,#p20');        
+            changeColor('#p00','#p10','#p20');        
             return true            
             break;  
 
         case test5.trim():
-            changeColor('#p01','#p11,#p21');        
+            changeColor('#p01','#p11','#p21');        
             return true            
             break;
 
         case test6.trim():
-            changeColor('#p02','#p12,#p22');        
+            changeColor('#p02','#p12','#p22');        
             return true            
             break;
 
         case test7.trim():
-            changeColor('#p00','#p11,#p22');        
+            changeColor('#p00','#p11','#p22');        
             return true            
             break;
 
         case test8.trim():
-            changeColor('#p02','#p11,#p20');        
+            changeColor('#p02','#p11','#p20');        
             return true            
             break;
         default:  
-            debugger;     
+               
         return false;          
     }
 
@@ -254,7 +254,7 @@ function evaluateGame(playerMark){
 function changeColor(btn1,btn2,btn3){
     $(btn1.toString()).removeClass('uk-button-default');
     $(btn1.toString()).addClass('uk-button-danger');
-    debugger;
+
     $(btn2.toString()).removeClass('uk-button-default');
     $(btn2.toString()).addClass('uk-button-danger');    
     $(btn3.toString()).removeClass('uk-button-default');
