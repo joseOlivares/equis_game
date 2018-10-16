@@ -139,6 +139,8 @@ var app = {
                     $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca
                     app.prepareBoard(false,true);//deshabilitamos todos los botones, para que el otro jugador elija
                     
+                    evaluateGame(app.myMark);//Evaluando el estado del Juego!
+
                     nextPlayer.markedPosition=pos; //posicion a marcar en el tablero del segundo jugador
                     if (app.myUserName===app.players.rivalName) { //si quien movio es el rival
                         nextPlayer.idNextPlayer=app.players.idContender; //el proximo movimiento sera del contender
@@ -159,3 +161,62 @@ var app = {
 
 };
 
+function evaluateGame(playerMark){
+    var mk="";
+    if(playerMark==='X'){
+        mk="XXX";
+    }else{
+        mk="OOO";
+    }
+
+    var p00=$('#p00').text();
+    var p01=$('#p01').text();
+    var p02=$('#p02').text();
+
+    var p10=$('#p10').text();
+    var p11=$('#p11').text();
+    var p12=$('#p12').text();
+
+    var p20=$('#p10').text();
+    var p21=$('#p11').text();
+    var p22=$('#p12').text();
+
+    var test="";
+
+    switch (mk) {
+        case p00+p01+p02:
+            alert("Ganador "+playerMark);
+            break;
+        case p10+p11+p12:
+            alert("Ganador "+playerMark);
+            break;
+
+        case p20+p21+p22:
+            alert("Ganador "+playerMark);
+            break;
+
+        case p00+p10+p20 :
+            alert("Ganador "+playerMark);
+            break;  
+
+        case p01+p11+p21:
+            alert("Ganador "+playerMark);
+            break;
+
+        case p02+p12+p22:
+            alert("Ganador "+playerMark);
+            break;
+
+        case p00+p11+p22:
+            alert("Ganador "+playerMark);
+            break;
+
+        case p02+p11+p02:
+            alert("Ganador "+playerMark);
+            break;
+        default:
+        return false;          
+    }
+
+    return false;
+}
