@@ -160,10 +160,10 @@ var app = {
                     $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca                   
                     
                     if(evaluateGame(app.myMark)){//Evaluando el estado del Juego!
+                        changeColor(app.p0,app.p1,app.p2); //marcando posicion ganadora 
                         socket.emit('game over',{idWinner:app.myId,idLoser:app.player2Id,winMk:app.myMark,p0:app.wp0,p1:app.wp1,p2:app.wp2});
                         alert("¡Felicidades ganaste!");
                         //setTimeout(app.prepareBoard(true,true), 3500);
-
                         
                         //definir que hace cuando usuario local gana el juego
                     }else{
@@ -215,48 +215,48 @@ function evaluateGame(playerMark){
 
     switch (mk) { //evaluando las combinaciones para ganar
         case test1.trim():
-            changeColor('#p00','#p01','#p02');
+            //changeColor('#p00','#p01','#p02');
             app.wp0='#p00',app.wp1='#p01',app.wp2='#p02';
             return true
             break;
         case test2.trim():
-            changeColor('#p10','#p11','#p12'); 
+            //changeColor('#p10','#p11','#p12'); 
             app.wp0='#p10',app.wp1='#p11',app.wp2='#p12';       
             return true            
             break;
 
         case test3.trim():
-            changeColor('#p20','#p21','#p22'); 
+            //changeColor('#p20','#p21','#p22'); 
             app.wp0='#p20',app.wp1='#p21',app.wp2='#p22';       
             return true            
             break;
 
         case test4.trim() :
-            changeColor('#p00','#p10','#p20');
+            //changeColor('#p00','#p10','#p20');
             app.wp0='#p00',app.wp1='#p10',app.wp2='#p20';        
             return true            
             break;  
 
         case test5.trim():
-            changeColor('#p01','#p11','#p21');
+            //changeColor('#p01','#p11','#p21');
             app.wp0='#p01',app.wp1='#p11',app.wp2='#p21';         
             return true            
             break;
 
         case test6.trim():
-            changeColor('#p02','#p12','#p22');  
+            //changeColor('#p02','#p12','#p22');  
             app.wp0='#p02',app.wp1='#p12',app.wp2='#p22';       
             return true            
             break;
 
         case test7.trim():
-            changeColor('#p00','#p11','#p22');
+            //changeColor('#p00','#p11','#p22');
             app.wp0='#p00',app.wp1='#p11',app.wp2='#p22';         
             return true            
             break;
 
         case test8.trim():
-            changeColor('#p20','#p11','#p02');
+            //changeColor('#p20','#p11','#p02');
             app.wp0='#p20',app.wp1='#p11',app.wp2='#p02';         
             return true            
             break;
