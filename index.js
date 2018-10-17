@@ -71,6 +71,9 @@ io.on('connection', function(socket){
  	socket.on('game over', function(data){ //enviando invitacion a jugar
 		socket.broadcast.to(data.idLoser).emit('you lose',data);//invitando al rival
 		console.log("===========Entro en game over");
+		console.log("p0="+data.p0);
+		console.log("p1="+data.p1);
+		console.log("p2="+data.p2);
 	});
 
     socket.on('disconnect', function () {
