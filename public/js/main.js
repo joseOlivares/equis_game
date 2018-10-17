@@ -83,6 +83,7 @@ var app = {
         });
 
         socket.on('you lose',function(data){
+            changeColor(data.p0,data.p1,data.p2); //marcando tambien las posiciones del ganador
             alert("¡Perdiste!");
             //app.prepareBoard(true,true);
         });                      
