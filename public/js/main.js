@@ -83,7 +83,7 @@ var app = {
 
         socket.on('you lose',function(data){
             alert("¡Perdiste!");
-            app.prepareBoard(true,true);
+            //app.prepareBoard(true,true);
         });                      
 
         $('#btnLogin').on('click',function(){
