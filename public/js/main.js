@@ -204,7 +204,7 @@ function evaluateGame(playerMark){
 
     var test1=p00+p01+p02, test2=p10+p11+p12, test3=p20+p21+p22;
     var test4=p00+p10+p20, test5=p01+p11+p21, test6=p02+p12+p22;
-    var test7=p00+p11+p22, test8=p02+p11+p20;
+    var test7=p00+p11+p22, test8=p20+p11+p02;
 
     switch (mk) { //evaluando las combinaciones para ganar
         case test1.trim():
@@ -242,7 +242,7 @@ function evaluateGame(playerMark){
             break;
 
         case test8.trim():
-            changeColor('#p02','#p11','#p20');        
+            changeColor('#p20','#p11','#p02');        
             return true            
             break;
         default:  
