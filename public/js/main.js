@@ -51,13 +51,13 @@ var app = {
             alert(data.rivalName+' ha aceptado Jugar... ¡realiza el primer movimiento!');
             $("#selectVersus").val(data.rivalName.toString()); //mostramos el nombre del rival
             $("#selectVersus").prop('disabled',true);//desabilitamos el select
-            app.prepareBoard(false,false); //habilitamos el tablero para que Contender seleccione una posicion.
             app.players=data; //guardamos los datos de los jugadores en memoria local del contender, es un Json
             app.myMark=data.contenderMark; //guardamos marca del Contender 
             
             app.myId=data.idContender; //guardado id en memoria local
             app.player2Id=data.idRival;//guardadndo id del segudno jugador
             
+            app.prepareBoard(false,false); //habilitamos el tablero para que Contender seleccione una posicion.
             socket.emit('config rival',data); //enviando datos de los usuarios para que los almacene el rival
 
             //**************************
