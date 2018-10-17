@@ -150,17 +150,17 @@ var app = {
                 var nextPlayer={idNextPlayer:-1,markedPosition:-1,mark:app.myMark};
                 
                 if (btnPosText!=="X" && btnPosText!=="O" ) { //si no ha sido marcada la posicion
-                    $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca
-                    app.prepareBoard(false,true);//deshabilitamos todos los botones, para que el otro jugador elija                    
+                    $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca                   
                     
                     if(evaluateGame(app.myMark)){//Evaluando el estado del Juego!
                         socket.emit('game over',{idWinner:app.myId,idLoser:app.player2Id});
-                        debugger;
-                        setTimeout(app.prepareBoard(true,true), 3500);
                         alert("¡Felicidades ganaste!");
+                        setTimeout(app.prepareBoard(true,true), 3500);
+
                         
                         //definir que hace cuando usuario local gana el juego
                     }else{
+                        app.prepareBoard(false,true);//deshabilitamos todos los botones, para que el otro jugador elija                         
                         nextPlayer.markedPosition=pos; //posicion a marcar en el tablero del segundo jugador
                         if (app.myUserName===app.players.rivalName) { //si quien movio es el rival
                             nextPlayer.idNextPlayer=app.players.idContender; //el proximo movimiento sera del contender
