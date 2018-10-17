@@ -135,6 +135,12 @@ var app = {
 
         });
 
+        $("txtUserName").keyup(function(event) {
+            if (event.keyCode === 13) {
+            $("#btnLogin").click();
+        }
+});
+
     },
 
     prepareBoard: function(happyFaces,areBtnDisabled){
