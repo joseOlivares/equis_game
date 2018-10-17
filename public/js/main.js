@@ -156,7 +156,9 @@ var app = {
                     if(evaluateGame(app.myMark)){//Evaluando el estado del Juego!
                         socket.emit('game over',{idWinner:app.myId,idLoser:app.player2Id});
                         alert("¡Felicidades ganaste!");
-                        app.prepareBoard(true,true);
+
+                        setTimeout(app.prepareBoard(true,true), 3500);
+                        
                         //definir que hace cuando usuario local gana el juego
                     }else{
                         nextPlayer.markedPosition=pos; //posicion a marcar en el tablero del segundo jugador
@@ -262,6 +264,5 @@ function changeColor(btn1,btn2,btn3){
     
     $(btn3.toString()).prop('disabled',false);
     $(btn3.toString()).removeClass('uk-button-default');
-    $(btn3.toString()).addClass('uk-button-danger');   
-    debugger;     
+    $(btn3.toString()).addClass('uk-button-danger');        
 }
