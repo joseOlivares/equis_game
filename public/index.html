@@ -121,7 +121,11 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript">
-        app.initialize();
+    	 //es obligaciín saber si el dispositivo esta listo, antes de ejecutar nuestro codigo
+        //document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener('deviceready', app.initialize(), false);
+        //app.initialize();
+        
     </script>
 </body>
 

@@ -12,16 +12,9 @@ var app = {
     wp2:-1,
     // Application Constructor
     initialize: function() {
-        //es obligaciín saber si el dispositivo esta listo, antes de ejecutar nuestro codigo
-        //document.addEventListener('deviceready', this.onDeviceReady, false);
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-
-    onDeviceReady: function() {
         app.listenSocket();
         app.prepareBoard(true, true); //prepareBoard(Does it put happy faces?, are the buttons disabled?)
     },
-
     listenSocket:function(){
         //var socket = io.connect(this.serverUrl); //creating socket connection
         socket.on('users connected', function(data){
