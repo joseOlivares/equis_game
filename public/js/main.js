@@ -151,7 +151,7 @@ var app = {
                 
                 if (btnPosText!=="X" && btnPosText!=="O" ) { //si no ha sido marcada la posicion
                     $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca
-                    
+                    app.prepareBoard(false,true);//deshabilitamos todos los botones, para que el otro jugador elija                    
                     
                     if(evaluateGame(app.myMark)){//Evaluando el estado del Juego!
                         socket.emit('game over',{idWinner:app.myId,idLoser:app.player2Id});
@@ -159,7 +159,6 @@ var app = {
                         app.prepareBoard(true,true);
                         //definir que hace cuando usuario local gana el juego
                     }else{
-                        app.prepareBoard(false,true);//deshabilitamos todos los botones, para que el otro jugador elija
                         nextPlayer.markedPosition=pos; //posicion a marcar en el tablero del segundo jugador
                         if (app.myUserName===app.players.rivalName) { //si quien movio es el rival
                             nextPlayer.idNextPlayer=app.players.idContender; //el proximo movimiento sera del contender
@@ -253,15 +252,16 @@ function evaluateGame(playerMark){
 }
 
 function changeColor(btn1,btn2,btn3){
-    $(btn1).prop('disabled',false);
+    $(btn1.toString()).prop('disabled',false);
     $(btn1.toString()).removeClass('uk-button-default');
     $(btn1.toString()).addClass('uk-button-danger');
 
-    $(btn2).prop('disabled',false);
+    $(btn2.toString()).prop('disabled',false);
     $(btn2.toString()).removeClass('uk-button-default');
     $(btn2.toString()).addClass('uk-button-danger');    
     
-    $(btn3).prop('disabled',false);
+    $(btn3.toString()).prop('disabled',false);
     $(btn3.toString()).removeClass('uk-button-default');
-    $(btn3.toString()).addClass('uk-button-danger');        
+    $(btn3.toString()).addClass('uk-button-danger');   
+    debugger;     
 }
