@@ -150,7 +150,7 @@ var app = {
     },
 
     setPosition: function(pos){
-        if(pos){
+        if(pos && !isDisabled(pos)){ //si la posicion existe y si el boton esta habilitado
             var btnPosText=$('#'+pos.toString()).text();
 
             if(app.players!==-1){ //si estan los datos de los jugadores en memoria
@@ -272,12 +272,22 @@ function changeColor(btn1,btn2,btn3){
     $(btn1.toString()).prop('disabled',false);
     $(btn1.toString()).removeClass('uk-button-default');
     $(btn1.toString()).addClass('uk-button-danger');
+    $(btn1.toString()).removeClass('uk-card-hover');
 
     $(btn2.toString()).prop('disabled',false);
     $(btn2.toString()).removeClass('uk-button-default');
-    $(btn2.toString()).addClass('uk-button-danger');    
+    $(btn2.toString()).addClass('uk-button-danger');
+    $(btn2.toString()).removeClass('uk-card-hover');    
     
     $(btn3.toString()).prop('disabled',false);
     $(btn3.toString()).removeClass('uk-button-default');
-    $(btn3.toString()).addClass('uk-button-danger');        
+    $(btn3.toString()).addClass('uk-button-danger'); 
+    $(btn3.toString()).removeClass('uk-card-hover');           
+}
+
+function isDisabled(btn){//valida si el boton está habilitado o no
+  if(document.getElementById(btn.toString()).disabled){
+    return true;
+  }
+  return false;  
 }
