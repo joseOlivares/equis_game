@@ -78,9 +78,9 @@ var app = {
         });   
 
         socket.on('playing', function(data){ //data
-            app.prepareBoard(false,false);
-            //marcado el movimiento del jugador anterior en nuestro tablero
-            $('#'+data.markedPosition.toString()).html('<span class="uk-text-large uk-text-bold">'+data.mark+'</span>');
+             //marcado el movimiento del jugador anterior en nuestro tablero
+            $('#'+data.markedPosition.toString()).html('<span class="uk-text-large uk-text-bold">'+data.mark+'</span>');           
+            app.prepareBoard(false,false); //deshabilitamos botones
             alert("¡Es tu turno!");
         });
 
@@ -140,7 +140,7 @@ var app = {
     prepareBoard: function(happyFaces,areBtnDisabled){
         for (var i = 0; i < 3; i++) {
             for (var j = 0; j < 3; j++) {
-                if(happyFaces==true){
+                if(happyFaces===true){
                     $('#p'+i+j).html('<span class="uk-icon" uk-icon="icon: happy"></span>'); 
                 }
 
@@ -157,7 +157,8 @@ var app = {
                 var nextPlayer={idNextPlayer:-1,markedPosition:-1,mark:app.myMark};
                 
                 if (btnPosText!=="X" && btnPosText!=="O" ) { //si no ha sido marcada la posicion
-                    $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca                   
+                    $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca
+                    app.prepareBoard(false,true);//deshabilitamos todos los botones, para que solo el otro jugador pueda seguir                   
                     
                     if(evaluateGame(app.myMark)){//Evaluando el estado del Juego!
                         changeColor(app.wp0,app.wp1,app.wp2); //marcando posicion ganadora 
@@ -166,8 +167,7 @@ var app = {
                         //setTimeout(app.prepareBoard(true,true), 3500);
                         
                         //definir que hace cuando usuario local gana el juego
-                    }else{
-                        app.prepareBoard(false,true);//deshabilitamos todos los botones, para que el otro jugador elija                         
+                    }else{                      
                         nextPlayer.markedPosition=pos; //posicion a marcar en el tablero del segundo jugador
                         if (app.myUserName===app.players.rivalName) { //si quien movio es el rival
                             nextPlayer.idNextPlayer=app.players.idContender; //el proximo movimiento sera del contender
