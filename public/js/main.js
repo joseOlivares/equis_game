@@ -155,6 +155,7 @@ var app = {
                     
                     if(evaluateGame(app.myMark)){//Evaluando el estado del Juego!
                         socket.emit('game over',{idWinner:app.myId,idLoser:app.player2Id});
+                        debugger;
                         setTimeout(app.prepareBoard(true,true), 3500);
                         alert("¡Felicidades ganaste!");
                         
