@@ -12,6 +12,9 @@ var app = {
     wp2:-1,
     // Application Constructor
     initialize: function() {
+        //es obligaciín saber si el dispositivo esta listo, antes de ejecutar nuestro codigo
+        document.addEventListener('deviceready', this.onDeviceReady, false);
+
         this.listenSocket();
         this.prepareBoard(true, true); //prepareBoard(Does it put happy faces?, are the buttons disabled?)
     },
