@@ -155,7 +155,7 @@ var app = {
                     if(evaluateGame(app.myMark)){//Evaluando el estado del Juego!
                         socket.emit('game over',{idWinner:app.myId,idLoser:app.player2Id});
                         alert("¡Felicidades ganaste!");
-                        setTimeout(app.prepareBoard(true,true), 3500);
+                        //setTimeout(app.prepareBoard(true,true), 3500);
 
                         
                         //definir que hace cuando usuario local gana el juego
