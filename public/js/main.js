@@ -5,7 +5,9 @@ var app = {
     myMark:-1, //-1 es no definido
     myId:-1,
     player2Id:-1,
-    winPos:-1,  //posiciones finales con las que ganó el juego
+    wp0:-1,  //posiciones finales con las que ganó el juego
+    wp1:-1,
+    wp2:-1,
     // Application Constructor
     initialize: function() {
         this.listenSocket();
@@ -155,7 +157,7 @@ var app = {
                     $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca                   
                     
                     if(evaluateGame(app.myMark)){//Evaluando el estado del Juego!
-                        socket.emit('game over',{idWinner:app.myId,idLoser:app.player2Id,p0:app.winPos.p0,p1:app.winPos.p1,p2:app.winPos.p2});
+                        socket.emit('game over',{idWinner:app.myId,idLoser:app.player2Id,p0:app.wp0,p1:app.wp1,p2:app.wp2});
                         alert("¡Felicidades ganaste!");
                         //setTimeout(app.prepareBoard(true,true), 3500);
 
@@ -211,48 +213,48 @@ function evaluateGame(playerMark){
     switch (mk) { //evaluando las combinaciones para ganar
         case test1.trim():
             changeColor('#p00','#p01','#p02');
-            app.winPos.p0='#p00',app.winPos.p1='#p01',app.winPos.p2='#p02';
+            app.wp0='#p00',app.wp1='#p01',app.wp2='#p02';
             return true
             break;
         case test2.trim():
             changeColor('#p10','#p11','#p12'); 
-            app.winPos.p0='#p10',app.winPos.p1='#p11',app.winPos.p2='#p12';       
+            app.wp0='#p10',app.wp1='#p11',app.wp2='#p12';       
             return true            
             break;
 
         case test3.trim():
             changeColor('#p20','#p21','#p22'); 
-            app.winPos.p0='#p20',app.winPos.p1='#p21',app.winPos.p2='#p22';       
+            app.wp0='#p20',app.wp1='#p21',app.wp2='#p22';       
             return true            
             break;
 
         case test4.trim() :
             changeColor('#p00','#p10','#p20');
-            app.winPos.p0='#p00',app.winPos.p1='#p10',app.winPos.p2='#p20';        
+            app.wp0='#p00',app.wp1='#p10',app.wp2='#p20';        
             return true            
             break;  
 
         case test5.trim():
             changeColor('#p01','#p11','#p21');
-            app.winPos.p0='#p01',app.winPos.p1='#p11',app.winPos.p2='#p21';         
+            app.wp0='#p01',app.wp1='#p11',app.wp2='#p21';         
             return true            
             break;
 
         case test6.trim():
             changeColor('#p02','#p12','#p22');  
-            app.winPos.p0='#p02',app.winPos.p1='#p12',app.winPos.p2='#p22';       
+            app.wp0='#p02',app.wp1='#p12',app.wp2='#p22';       
             return true            
             break;
 
         case test7.trim():
             changeColor('#p00','#p11','#p22');
-            app.winPos.p0='#p00',app.winPos.p1='#p11',app.winPos.p2='#p22';         
+            app.wp0='#p00',app.wp1='#p11',app.wp2='#p22';         
             return true            
             break;
 
         case test8.trim():
             changeColor('#p20','#p11','#p02');
-            app.winPos.p0='#p20',app.winPos.p1='#p11',app.winPos.p2='#p02';         
+            app.wp0='#p20',app.wp1='#p11',app.wp2='#p02';         
             return true            
             break;
         default:  
