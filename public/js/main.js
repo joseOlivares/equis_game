@@ -160,7 +160,7 @@ var app = {
                     $('#'+pos.toString()).html('<span class="uk-text-large uk-text-bold">'+app.myMark+'</span>');//ponemos su marca                   
                     
                     if(evaluateGame(app.myMark)){//Evaluando el estado del Juego!
-                        socket.emit('game over',{idWinner:app.myId,idLoser:app.player2Id,winMk=app.myMark,p0:app.wp0,p1:app.wp1,p2:app.wp2});
+                        socket.emit('game over',{idWinner:app.myId,idLoser:app.player2Id,winMk:app.myMark,p0:app.wp0,p1:app.wp1,p2:app.wp2});
                         alert("¡Felicidades ganaste!");
                         //setTimeout(app.prepareBoard(true,true), 3500);
 
