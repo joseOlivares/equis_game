@@ -13,10 +13,13 @@ var app = {
     // Application Constructor
     initialize: function() {
         //es obligaciín saber si el dispositivo esta listo, antes de ejecutar nuestro codigo
+        //document.addEventListener('deviceready', this.onDeviceReady, false);
         document.addEventListener('deviceready', this.onDeviceReady, false);
+    },
 
-        this.listenSocket();
-        this.prepareBoard(true, true); //prepareBoard(Does it put happy faces?, are the buttons disabled?)
+    onDeviceReady: function() {
+        app.listenSocket();
+        app.prepareBoard(true, true); //prepareBoard(Does it put happy faces?, are the buttons disabled?)
     },
 
     listenSocket:function(){
