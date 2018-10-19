@@ -90,6 +90,7 @@ var app = {
             $(data.p2.toString()).html('<span class="uk-text-large uk-text-bold">'+data.winMk+'</span>');//ponemos la ultima marca
             $(data.p1.toString()).html('<span class="uk-text-large uk-text-bold">'+data.winMk+'</span>');//ponemos la ultima marca 
             $(data.p0.toString()).html('<span class="uk-text-large uk-text-bold">'+data.winMk+'</span>');//ponemos la ultima marca
+            navigator.vibrate(1000); //usando el vibrador del cel
             alert("¡Perdiste!");
             //app.prepareBoard(true,true);
         });                      
@@ -170,6 +171,7 @@ var app = {
                     if(evaluateGame(app.myMark)){//Evaluando el estado del Juego!
                         changeColor(app.wp0,app.wp1,app.wp2); //marcando posicion ganadora 
                         socket.emit('game over',{idWinner:app.myId,idLoser:app.player2Id,winMk:app.myMark,p0:app.wp0,p1:app.wp1,p2:app.wp2});
+                        navigator.vibrate(1000);//usando el vibrador del cel
                         alert("¡Felicidades ganaste!");
                         //setTimeout(app.prepareBoard(true,true), 3500);
                         
