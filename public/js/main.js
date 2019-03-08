@@ -15,7 +15,12 @@ var app = {
         app.listenSocket();
         app.prepareBoard(true, true); //prepareBoard(Does it put happy faces?, are the buttons disabled?)
         //mostrando indicaciones conuikit notification
-        UIkit.notification({message: '<span uk-icon=\'icon: arrow-right\'></span> Write your name...',pos: 'top-left'})
+        UIkit.notification({message: 'Write your name <span uk-icon=\'icon: arrow-right\'></span>',
+        status:'primary',
+        setTimeout(function () {
+
+        }, 10);
+        pos: 'top-left'});
     },
     listenSocket:function(){
         //var socket = io.connect(this.serverUrl); //creating socket connection
