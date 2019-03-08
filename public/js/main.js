@@ -104,6 +104,7 @@ var app = {
 
             //contando cuantos jugadores estan logeados
                 var numPlayers= $('#selectVersus option').size;
+                alert(numPlayers);
                 var userName=$('#txtUserName').val()||-1;//Guardadndo Nombre de usuario
                 app.myUserName=userName.trim();
 
