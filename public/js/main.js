@@ -15,7 +15,7 @@ var app = {
         app.listenSocket();
         app.prepareBoard(true, true); //prepareBoard(Does it put happy faces?, are the buttons disabled?)
         //mostrando indicaciones conuikit notification
-        UIkit.notification({message: 'Write your name <span uk-icon=\'icon: arrow-right\'></span>'});
+        
     };
     listenSocket:function(){
         //var socket = io.connect(this.serverUrl); //creating socket connection
