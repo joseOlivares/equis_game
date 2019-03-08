@@ -15,9 +15,9 @@ var app = {
         app.listenSocket();
         app.prepareBoard(true, true); //prepareBoard(Does it put happy faces?, are the buttons disabled?)
         //mostrando indicaciones conuikit notification
-        UIkit.notification({message: 'Write your name <span uk-icon=\'icon: arrow-right\'></span>',
+        UIkit.notification({message: 'Write your name <span uk-icon=\'icon: arrow-down\'></span>',
         status:'primary',
-        pos: 'top-left',
+        pos: 'top-center',
         timeout:5000});
     },
     listenSocket:function(){
@@ -101,8 +101,19 @@ var app = {
         });
 
         $('#btnLogin').on('click',function(){
+
+            //contando cuantos jugadores estan logeados
+                var numPlayers= $('#selectVersus option').size();
                 var userName=$('#txtUserName').val()||-1;//Guardadndo Nombre de usuario
                 app.myUserName=userName.trim();
+
+                if (numPlayers<2) {
+                  UIkit.notification({message: 'Please, whait for a contender <span uk-icon=\'icon: clock\'></span>',
+                  status:'secondary',
+                  pos: 'top-center',
+                  timeout:4000});
+                }
+            
                 if(app.myUserName==="" || app.myUserName.length <3){
                     UIkit.notification("<span class='uk-text-capitalize'>Escriba nombre de usuario</span>", {status: 'danger'});
                     app.myUserName=-1;
