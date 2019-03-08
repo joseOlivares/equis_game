@@ -1,4 +1,4 @@
-# equis_game
+# equis_game (Tic-tac-toe)
 
 
 Tic Tac Toe Game, using SocketIO
