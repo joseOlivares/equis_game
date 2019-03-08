@@ -15,7 +15,7 @@ var app = {
         app.listenSocket();
         app.prepareBoard(true, true); //prepareBoard(Does it put happy faces?, are the buttons disabled?)
         //mostrando indicaciones conuikit notification
-        UIkit.notification({message: 'Write your name <span uk-icon=\'icon: arrow-down\'></span>',
+        UIkit.notification({message: '<span uk-icon=\'icon: arrow-down\'></span>Write your name',
         status:'primary',
         pos: 'top-center',
         timeout:5000});
@@ -112,9 +112,9 @@ var app = {
                 app.myUserName=userName.trim();
 
                 if (numPlayers<2) {
-                  UIkit.notification({message: 'Please, whait for a contender <span uk-icon=\'icon: clock\'></span>',
+                  UIkit.notification({message: 'Please, wait for a contender <span uk-icon=\'icon: clock\'></span>',
                   status:'secondary',
-                  pos: 'bottom-center',
+                  pos: 'top-center',
                   timeout:4000});
                 }
 
