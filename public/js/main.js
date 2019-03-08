@@ -37,6 +37,12 @@ var app = {
                 }
             }
 
+            var numPlayers= $('#selectVersus option').length; //contando cuantos jugadores estan logeados
+            if (numPlayers===2) {
+              //moviendo select para mostrar que hay un usuario contendiente
+              $('#selectVersus').addClass("uk-animation-shake");
+            }
+
         });
 
         socket.on('start game', function(data){ //data contiene los nombres de los jugadores (solo para Rival)
@@ -101,17 +107,14 @@ var app = {
         });
 
         $('#btnLogin').on('click',function(){
-
-            //contando cuantos jugadores estan logeados
-                var numPlayers= $('#selectVersus option').length;
-                alert(numPlayers);
+                var numPlayers= $('#selectVersus option').length; //contando cuantos jugadores estan logeados
                 var userName=$('#txtUserName').val()||-1;//Guardadndo Nombre de usuario
                 app.myUserName=userName.trim();
 
                 if (numPlayers<2) {
                   UIkit.notification({message: 'Please, whait for a contender <span uk-icon=\'icon: clock\'></span>',
                   status:'secondary',
-                  pos: 'top-center',
+                  pos: 'bottom-center',
                   timeout:4000});
                 }
 
