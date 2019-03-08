@@ -53,13 +53,16 @@ io.on('connection', function(socket){
 		var idContender=searchUser(data.contender);
 		data.idContender=idContender;//adicionando el idContender a data para no tener que buscarlo nuevamente
 		data.contenderMark="X";
-    //falta remover usuarios que estan juangando, del listado(select) de los otros usuarios
+    //definiendo estados de usuarios que estan juangando, del listado(select) de los otros usuarios
       console.log("###################### Player 1: "+data.rivalName);
       console.log("###################### Player 2: "+data.contender);
       setUserPlayingStatus(data.rivalName,true);
       setUserPlayingStatus(data.contender,true);
 		//invitando al contender a hacer el primer movimiento, setando jugadores en ambiente del contender
 		socket.broadcast.to(idContender).emit('contender firstmove',data);
+    // enviando listado con status (isPlaying) actualizado a todos los usuarios conectados
+    //Para que los que estan jugando no aprezcan en el listado de posibles contendientes
+    io.sockets.emit('users list', connectedUsers);
 		console.log("===========Entro en game started");
 		console.log("idContender="+data.idContender+" ContenderMark="+data.contenderMark);
 		console.log("idRival="+data.idRival+" rivalMark="+data.rivalMark);
