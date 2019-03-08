@@ -103,7 +103,7 @@ var app = {
         $('#btnLogin').on('click',function(){
 
             //contando cuantos jugadores estan logeados
-                var numPlayers= $('#selectVersus option').size();
+                var numPlayers= $('#selectVersus option').size;
                 var userName=$('#txtUserName').val()||-1;//Guardadndo Nombre de usuario
                 app.myUserName=userName.trim();
 
@@ -113,7 +113,7 @@ var app = {
                   pos: 'top-center',
                   timeout:4000});
                 }
-            
+
                 if(app.myUserName==="" || app.myUserName.length <3){
                     UIkit.notification("<span class='uk-text-capitalize'>Escriba nombre de usuario</span>", {status: 'danger'});
                     app.myUserName=-1;
