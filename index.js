@@ -20,8 +20,8 @@ app.get('/', function(req, res){
 //io.set('origins','*:*');
 
 io.on('connection', function(socket){
-			socketCount+=1;// Socket has connected, increase socket count	
-			io.sockets.emit('users connected', socketCount);    // Let all sockets know how many are connected		
+			socketCount+=1;// Socket has connected, increase socket count
+			io.sockets.emit('users connected', socketCount);    // Let all sockets know how many are connected
 
 	socket.on('user loging',function(userName){
 
@@ -33,7 +33,7 @@ io.on('connection', function(socket){
 
 			console.log('An user connected... '+userName.toString());
 			io.sockets.emit('users list', connectedUsers); // enviando listado de todos los usuarios conectados
-		} 
+		}
 		// falta emitir mensaje cuando nombre de usuario ya existe y solucionar problema
 
 	});
@@ -46,13 +46,16 @@ io.on('connection', function(socket){
 		socket.broadcast.to(idRival).emit('start game',data);//invitando al rival
 		console.log("===========Entro en play with");
 	});
- 
+
 
 	socket.on('game started', function(data){ //recibiendo datos de los jugadores para comenzar a jugar
 		var idContender=searchUser(data.contender);
 		data.idContender=idContender;//adicionando el idContender a data para no tener que buscarlo nuevamente
-		data.contenderMark="X"; 
-		//invitando al contender a hacer el primer movimiento, setando jugadores en ambiente del contender	
+		data.contenderMark="X";
+    //falta remover usuarios que estan juangando, del listado(select) de los otros usuarios
+    console.log("###################### Player 1: "+data.rivalName);
+    console.log("###################### Player 2: "+data.contender);
+		//invitando al contender a hacer el primer movimiento, setando jugadores en ambiente del contender
 		socket.broadcast.to(idContender).emit('contender firstmove',data);
 		console.log("===========Entro en game started");
 		console.log("idContender="+data.idContender+" ContenderMark="+data.contenderMark);
@@ -60,9 +63,9 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('config rival',function(data){
-		socket.broadcast.to(data.idRival).emit('rival setplayers',data); //seteando datos de jugadores en memoria del Rival 
+		socket.broadcast.to(data.idRival).emit('rival setplayers',data); //seteando datos de jugadores en memoria del Rival
 	});
- 
+
  	socket.on('next player', function(data){ //enviando invitacion a jugar
 		socket.broadcast.to(data.idNextPlayer).emit('playing',data);//invitando al rival
 		console.log("===========Entro en next player");
@@ -79,10 +82,10 @@ io.on('connection', function(socket){
     socket.on('disconnect', function () {
         socketCount--; // Decrease the socket count on a disconnect
         var userDisconnected="Nothing";
-	    for(var i=0; i < connectedUsers.length; i++){  //deletng users desconnected   
+	    for(var i=0; i < connectedUsers.length; i++){  //deletng users desconnected
 	        if(connectedUsers[i].id === socket.id){
 	        	userDisconnected=connectedUsers[i].userName;
-	          connectedUsers.splice(i,1); 
+	          connectedUsers.splice(i,1);
 	        }
 	    }
 
@@ -93,7 +96,7 @@ io.on('connection', function(socket){
 }); //close socket.on("connection")
 
 function searchUser(userName){
-	for(var i=0; i < connectedUsers.length; i++){  //deletng users desconnected   
+	for(var i=0; i < connectedUsers.length; i++){  //deletng users desconnected
 	    if(connectedUsers[i].userName === userName){
 	        return connectedUsers[i].id; //devolviendo el socket id
 	    }

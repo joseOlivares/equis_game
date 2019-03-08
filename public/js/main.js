@@ -39,7 +39,7 @@ var app = {
 
             var numPlayers= $('#selectVersus option').length; //contando cuantos jugadores estan logeados
             if (numPlayers===2) {
-              //moviendo select para mostrar que hay un usuario contendiente
+              //shake select para mostrar que hay un usuario contendiente
               $('#selectVersus').addClass("uk-animation-shake");
             }
 
