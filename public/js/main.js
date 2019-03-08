@@ -32,7 +32,8 @@ var app = {
             $('#selectVersus').children('option:not(:first)').remove(); //limpiando todos los valores, menos el primero
 
             for (var i = 0; i < connectedUsers.length; i++) {
-                if(connectedUsers[i].userName!==app.myUserName){
+                //si no es mi usuario, y si no esta jugando, loagregamos a la lista
+                if(connectedUsers[i].userName!==app.myUserName && connectedUsers[i].isPlaying!==true){
                     $('#selectVersus').append($('<option>',{ value:connectedUsers[i].userName,text:connectedUsers[i].userName}));
                 }
             }

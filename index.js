@@ -28,7 +28,8 @@ io.on('connection', function(socket){
 		if(searchUser(userName)===-1){ //si nombre de usuario no existe en la lista
 			connectedUsers.push({
 				id : socket.id,
-				userName : userName
+				userName : userName,
+        isPlaying: false   //defual user status is Playing False
 			});
 
 			console.log('An user connected... '+userName.toString());
@@ -53,8 +54,10 @@ io.on('connection', function(socket){
 		data.idContender=idContender;//adicionando el idContender a data para no tener que buscarlo nuevamente
 		data.contenderMark="X";
     //falta remover usuarios que estan juangando, del listado(select) de los otros usuarios
-    console.log("###################### Player 1: "+data.rivalName);
-    console.log("###################### Player 2: "+data.contender);
+      console.log("###################### Player 1: "+data.rivalName);
+      console.log("###################### Player 2: "+data.contender);
+      setUserPlayingStatus(data.rivalName,true);
+      setUserPlayingStatus(data.contender,true);
 		//invitando al contender a hacer el primer movimiento, setando jugadores en ambiente del contender
 		socket.broadcast.to(idContender).emit('contender firstmove',data);
 		console.log("===========Entro en game started");
@@ -96,13 +99,22 @@ io.on('connection', function(socket){
 }); //close socket.on("connection")
 
 function searchUser(userName){
-	for(var i=0; i < connectedUsers.length; i++){  //deletng users desconnected
+	for(var i=0; i < connectedUsers.length; i++){  //searching user
 	    if(connectedUsers[i].userName === userName){
 	        return connectedUsers[i].id; //devolviendo el socket id
 	    }
 	}
 
 	return -1; //not found
+}
+
+function setUserPlayingStatus(userName,isPlaying){
+	for(var i=0; i < connectedUsers.length; i++){  //searching user
+	    if(connectedUsers[i].userName === userName){
+	        connectedUsers[i].isPlaying= isPlaying; //set user isPlaying Status
+          break;
+	    }
+	}
 }
 
 server.listen(port, function(){
