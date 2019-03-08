@@ -103,7 +103,7 @@ var app = {
         $('#btnLogin').on('click',function(){
 
             //contando cuantos jugadores estan logeados
-                var numPlayers= $('#selectVersus option').size;
+                var numPlayers= $('#selectVersus option').length;
                 alert(numPlayers);
                 var userName=$('#txtUserName').val()||-1;//Guardadndo Nombre de usuario
                 app.myUserName=userName.trim();
