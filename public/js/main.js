@@ -17,7 +17,7 @@ var app = {
         //mostrando indicaciones conuikit notification
         UIkit.notification({message: '<span uk-icon=\'icon: arrow-down\'></span>Write your name',
         status:'primary',
-        pos: 'top-center',
+        pos: 'top-left',
         timeout:5000});
     },
     listenSocket:function(){
