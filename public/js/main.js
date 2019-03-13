@@ -22,7 +22,7 @@ var app = {
           timeout:5000});
         */
           var userInput=document.getElementById('txtUserName');
-          UIkit.tooltip(userInput).show();//Fires after the item's show animation has completed
+          UIkit.tooltip(userInput,'duration:200;').show();//Fires after the item's show animation has completed
     },
     listenSocket:function(){
         //var socket = io.connect(this.serverUrl); //creating socket connection
