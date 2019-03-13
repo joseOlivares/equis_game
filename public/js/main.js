@@ -23,7 +23,7 @@ var app = {
         */
           var userInput=document.getElementById('txtUserName');
 
-          UIkit.tooltip(userInput,{duration: 200}).show();//Fires after the item's show animation has completed
+          UIkit.tooltip(userInput,{duration3: 200}).show();//Fires after the item's show animation has completed
     },
     listenSocket:function(){
         //var socket = io.connect(this.serverUrl); //creating socket connection
