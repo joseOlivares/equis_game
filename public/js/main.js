@@ -22,9 +22,8 @@ var app = {
           timeout:5000});
         */
           var userInput=document.getElementById('txtUserName');
-
-          UIkit.tooltip(userInput).show();//Fires after the item's show animation has completed
-          UIkit.tooltip(userInput,{pos: 'top', duration:1000});
+          UIkit.tooltip(userInput,{duration:200}).show();//Fires after the item's show animation has completed
+          //UIkit.tooltip(userInput,{}).hide();
     },
     listenSocket:function(){
         //var socket = io.connect(this.serverUrl); //creating socket connection
@@ -167,8 +166,11 @@ var app = {
         $("#txtUserName").keyup(function(event) {
             if (event.keyCode === 13) {
             $("#btnLogin").click();
-        }
-});
+            }
+
+            //ocultando tooltip
+            UIkit.tooltip(document.getElementById('txtUserName')).hide();
+        });
 
     },
 
