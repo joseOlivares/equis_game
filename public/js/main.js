@@ -22,8 +22,9 @@ var app = {
           timeout:5000});
         */
           var userInput=document.getElementById('txtUserName');
-          UIkit.tooltip(userInput,hola);
+
           UIkit.tooltip(userInput).show();//Fires after the item's show animation has completed
+          UIkit.tooltip(userInput,{pos: 'top', duration:1000});
     },
     listenSocket:function(){
         //var socket = io.connect(this.serverUrl); //creating socket connection
