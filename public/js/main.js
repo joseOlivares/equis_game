@@ -21,7 +21,8 @@ var app = {
           pos: 'top-left',
           timeout:5000});
 
-          UIkit.tooltip('txtUserName').show();    
+          var userInput=document.getElementById('txtUserName');
+          UIkit.tooltip(userInput).show();
     },
     listenSocket:function(){
         //var socket = io.connect(this.serverUrl); //creating socket connection
