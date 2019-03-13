@@ -16,14 +16,10 @@ var app = {
         app.prepareBoard(true, true); //prepareBoard(Does it put happy faces?, are the buttons disabled?)
 
         //mostrando indicaciones conuikit notification
-        /*  UIkit.notification({message: 'Write your name<span uk-icon=\'icon: arrow-right\'></span>',
+          UIkit.notification({message: 'Write your name<span uk-icon=\'icon: arrow-right\'></span>',
           status:'primary',
           pos: 'top-left',
-          timeout:5000});
-        */
-          var userInput=document.getElementById('txtUserName');
-          UIkit.tooltip(userInput,{duration:200}).show();//Fires after the item's show animation has completed
-          //UIkit.tooltip(userInput,{}).hide();
+          timeout:3000});
     },
     listenSocket:function(){
         //var socket = io.connect(this.serverUrl); //creating socket connection
@@ -167,9 +163,6 @@ var app = {
             if (event.keyCode === 13) {
             $("#btnLogin").click();
             }
-
-            //ocultando tooltip
-            UIkit.tooltip(document.getElementById('txtUserName')).hide();
         });
 
     },
