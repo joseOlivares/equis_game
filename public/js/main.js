@@ -104,7 +104,7 @@ var app = {
             $(data.p1.toString()).html('<span class="uk-text-large uk-text-bold">'+data.winMk+'</span>');//ponemos la ultima marca
             $(data.p0.toString()).html('<span class="uk-text-large uk-text-bold">'+data.winMk+'</span>');//ponemos la ultima marca
             navigator.vibrate(1000); //usando el vibrador del cel
-            alert("¡Perdiste!");
+            alert("¡Perdiste! (You lose!)");
             //app.prepareBoard(true,true);
         });
 
