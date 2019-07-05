@@ -29,11 +29,11 @@ var app = {
 
         socket.on('users list',function(connectedUsers){
             //var valores=connectedUsers;
-            //debugger;
+            debugger;
             $('#selectVersus').children('option:not(:first)').remove(); //limpiando todos los valores, menos el primero
 
             for (var i = 0; i < connectedUsers.length; i++) {
-                //si no es mi usuario, y si no esta jugando, loagregamos a la lista
+                //si no es mi usuario, y si no esta jugando, lo agregamos a la lista
                 if(connectedUsers[i].userName!==app.myUserName && connectedUsers[i].isPlaying!==true){
                     $('#selectVersus').append($('<option>',{ value:connectedUsers[i].userName,text:connectedUsers[i].userName}));
                 }
@@ -49,7 +49,7 @@ var app = {
 
         socket.on('start game', function(data){ //data contiene los nombres de los jugadores (solo para Rival)
                 var play=confirm(data.contender+' quiere jugar contigo... (wants to play)')||false;
-                if(play==true){//si acepta jugar
+                if(play===true){//si acepta jugar
                     socket.emit('game started',data); //le indicamos al server que el juego inicio
                     $("#selectVersus").val(data.contender.toString()); //mostramos el nombre del contrincante
                     $("#selectVersus").prop('disabled',true);//desabilitamos el select
@@ -62,7 +62,6 @@ var app = {
 
         socket.on('contender firstmove', function(data){ //data contiene los nombres y ids de los jugadores
             //ocurre en lado del Contender
-            alert(data.rivalName+' ha aceptado Jugar... ¡realiza el primer movimiento!');
             $("#selectVersus").val(data.rivalName.toString()); //mostramos el nombre del rival
             $("#selectVersus").prop('disabled',true);//desabilitamos el select
             app.players=data; //guardamos los datos de los jugadores en memoria local del contender, es un Json
@@ -74,6 +73,7 @@ var app = {
             app.prepareBoard(false,false); //habilitamos el tablero para que Contender seleccione una posicion.
             socket.emit('config rival',data); //enviando datos de los usuarios para que los almacene el rival
 
+            alert(data.rivalName+' ha aceptado Jugar... ¡realiza el primer movimiento!'); //notificando
             //**************************
             //aqui esperamos hasta que el contender de clic en algun botón indicando su posición a elegir
             //se debe disparar app.setPosition();
