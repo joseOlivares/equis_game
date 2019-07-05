@@ -45,6 +45,7 @@ var app = {
               $('#selectVersus').addClass("uk-animation-shake");
             }
 
+            alert('se cargo users list');//debugg info
         });
 
         socket.on('start game', function(data){ //data contiene los nombres de los jugadores (solo para Rival)
@@ -55,8 +56,8 @@ var app = {
                     $("#selectVersus").prop('disabled',true);//desabilitamos el select
                     $('#btnFight').prop('disabled', true);  //desabilitamos boton
                     //app.myMark=data.rivalMark;
-
                     //data.idRival
+                    alert('se cargo start game');//debugg info
                 } //si no acepta hacer, hacer algo
         });
 
