@@ -3,7 +3,7 @@
 
 Tic Tac Toe Game, using SocketIO
 
-You can test it on https://equisgame.herokuapp.com/
+You can test it on https://tictactoe-y8s3.onrender.com/
 ->Write your name and wait for a contender.
 
 Coded by José Luis Olivares
